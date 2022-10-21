@@ -2,9 +2,10 @@
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Ferrances Lorenzo
+- Pablo Conde
+- Tomas Gonzalez
+- Matias Gonzalez.
 
 ## Capturas
 
