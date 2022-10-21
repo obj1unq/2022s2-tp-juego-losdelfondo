@@ -13,8 +13,14 @@
 
 ## Reglas de Juego / Instrucciones
 
-(Escribirlas)
+Juego tipo dungeon crawl donde el **personaje** debe de llegar al final de la primera sala *momentaneamente* para ganar el juego.
 
+
+## Personaje
+
+## Mapa
+
+## Enemigos
 
 ## Otros
 
