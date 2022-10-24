@@ -2,8 +2,8 @@ import wollok.game.*
 
 object pepita {
 
-	method position() = game.center()
+	var property position = game.center()
 
-	method image() = "pepita.png"
+	method image() = "milei/standing_Right.png"
 
 }
