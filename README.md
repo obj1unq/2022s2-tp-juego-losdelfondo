@@ -1,4 +1,4 @@
-# Nombre del juego (<- borrar y completar)
+# Escapando de la UNQ
 
 ## Equipo de desarrollo
 
