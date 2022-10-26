@@ -35,6 +35,6 @@ object obstaculo {
 	
 	*/
 	method nuevo(posicion, imagen) {
-		return (new Obstaculo(position = posicion, image = imagen))
+		return game.addVisual(new Obstaculo(position = posicion, image = imagen))
 	}
 }

@@ -1,5 +1,7 @@
 import wollok.game.* 
 import obstaculos.*
+import testMapa.*
+
 
 program juego {
 	
@@ -7,10 +9,9 @@ program juego {
 	game.title("Juego Base")
 	game.cellSize(20)
 	game.height(30)
-	game.width(30)
-	game.addVisual(obstaculo.nuevo(game.at(0,0), "assets/objetos/Sprite-test-Moneda.png"))
-	game.addVisualCharacter("assets/principal/standing_Right.png")
-	
+	game.width(30)	
+	pincel.pintarVerticalmente(0, 0, 10, "assets/objetos/Sprite-test-Moneda.png")
+	pincel.pintarHorizontalmente(0, 0, 10, "assets/objetos/Sprite-test-Moneda.png")
 	//movimiento
 //	keyboard.w.onPressDo(pepita.moverse(arriba))
 //	keyboard.a.onPressDo(pepita.moverse(izquierda))
