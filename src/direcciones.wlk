@@ -1,40 +1,38 @@
 import wollok.game.*
 
-object arriba{
+
+class Direccion{
 	
-	method posicion(posicion)= posicion.up(1) 
+	method posicion(_posicion_)
 	
 	method puedeMoverseA(personaje){
 		return self.posicion(personaje.position()).allElements().all({elemento => elemento.sePuedeAtravesar()})
 	}
 }
 
-object abajo{
+class Arriba inherits Direccion{
 	
-	method posicion(posicion)= posicion.down(1)	
+	override method posicion(posicion)= posicion.up(1) 
 	
-	method puedeMoverseA(personaje){
-		return self.posicion(personaje.position()).allElements().all({elemento => elemento.sePuedeAtravesar()})
-		
-	}
 }
 
-object derecha{
+class Abajo inherits Direccion{
 	
-	method posicion(posicion)= posicion.right(1)
+	override method posicion(posicion)= posicion.down(1)	
 	
-	method puedeMoverseA(personaje){
-		return self.posicion(personaje.position()).allElements().all({elemento => elemento.sePuedeAtravesar()})
-		
-	}
+
 }
 
-object izquierda{
+class Derecha inherits Direccion{
 	
-	method posicion(posicion)= posicion.left(1)
+	override method posicion(posicion)= posicion.right(1)
 	
-	method puedeMoverseA(personaje){
-		return self.posicion(personaje.position()).allElements().all({elemento => elemento.sePuedeAtravesar()})
-		
-	}
+
+}
+
+class Izquierda inherits Direccion{
+	
+	override method posicion(posicion)= posicion.left(1)
+	
+
 }
