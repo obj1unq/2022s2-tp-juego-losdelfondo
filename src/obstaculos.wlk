@@ -10,21 +10,14 @@ class Obstaculo {
 	*/
 	var property position = null
 	var property image = null
-	var esTraspasable = false
+	var esAtravesable = false
 	
-	method esTraspasable() {
-		return esTraspasable
+	method sePuedeAtravesar() {
+		return esAtravesable
 	}
 	
 	method cambiarEstado() {
-		esTraspasable = !self.esTraspasable()
-	}
-	
-	
-	method colisionarCon(objeto) {
-		if(!self.esTraspasable()) {
-			//TODO: No deberia dejar pasar al objeto
-		}
+		esAtravesable = !self.sePuedeAtravesar()
 	}
 }
 
