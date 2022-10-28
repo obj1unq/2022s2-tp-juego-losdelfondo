@@ -17,7 +17,7 @@ program juego {
 	game.addVisual(fidel)
 	
 	//configuracion
-	pincel.pintarVerticalmente(10, 10, 15, "assets/objetos/Sprite-test-Moneda.png")
+	pincel.pintarVerticalmente(10, 10, 15, obstaculo)
 	//pincel.pintarHorizontalmente(0, 0, 10, "assets/objetos/Sprite-test-Moneda.png")
 	
 	//movimiento

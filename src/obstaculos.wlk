@@ -42,13 +42,9 @@ object puerta {
 }
 
 object obstaculo {
-	/*
-	
-	El objeto obstaculo define un nuevo obstaculo en el mapa, a partir de una posicion e 
-	imagen dada.
-	
-	*/
-	method nuevo(posicion, imagen) {
-		return game.addVisual(new Obstaculo(position = posicion, image = imagen))
+	/*El objeto obstaculo define un nuevo obstaculo en el mapa, a partir de una posicion.*/
+	method nuevo(posicion) {
+		return game.addVisual(new Obstaculo(position = posicion, image="assets/objetos/Sprite-test-Moneda.png"))
 	}
 }
+
