@@ -9,7 +9,7 @@ program juego {
 	
 	//init nivel
 	game.title("juego Base")
-	game.cellSize(20)
+	game.cellSize(50)
 	game.height(30)
 	game.width(30)
 	game.addVisual(principal)
@@ -17,8 +17,8 @@ program juego {
 	game.addVisual(fidel)
 	
 	//configuracion
-	pincel.pintarVerticalmente(0, 0, 10, "assets/objetos/Sprite-test-Moneda.png")
-	pincel.pintarHorizontalmente(0, 0, 10, "assets/objetos/Sprite-test-Moneda.png")
+	pincel.pintarVerticalmente(10, 10, 15, "assets/objetos/Sprite-test-Moneda.png")
+	//pincel.pintarHorizontalmente(0, 0, 10, "assets/objetos/Sprite-test-Moneda.png")
 	
 	//movimiento
 	keyboard.w().onPressDo({principal.moverse(arriba)})
