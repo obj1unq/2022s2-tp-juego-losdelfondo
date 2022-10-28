@@ -12,13 +12,14 @@ class Obstaculo {
 	var property image = null
 	var esTraspasable = false
 	
-	method cambiarEstado() {
-		esTraspasable = !esTraspasable
-	}
-	
 	method esTraspasable() {
 		return esTraspasable
 	}
+	
+	method cambiarEstado() {
+		esTraspasable = !self.esTraspasable()
+	}
+	
 	
 	method colisionarCon(objeto) {
 		if(!self.esTraspasable()) {
@@ -27,10 +28,30 @@ class Obstaculo {
 	}
 }
 
+class Puerta inherits Obstaculo {
+	
+	override method cambiarEstado(){
+		// Cambia el estado cuando el personaje consigue una llave
+	}
+	
+}
+
+object puerta {
+	/*
+	
+	El objeto peuta define una nueva puerta en el mapa, a partir de una posicion e 
+	imagen dada.
+	
+	*/
+	method nuevo(posicion, imagen) {
+		return (new Puerta(position = posicion, image = imagen))
+	}
+}
+
 object obstaculo {
 	/*
 	
-	El objto obstaculo define un nuevo obstaculo en el mapa, a partir de una posicion e 
+	El objeto obstaculo define un nuevo obstaculo en el mapa, a partir de una posicion e 
 	imagen dada.
 	
 	*/
