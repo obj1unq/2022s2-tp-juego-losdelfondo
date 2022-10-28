@@ -22,6 +22,8 @@ program juego {
 	keyboard.d().onPressDo({principal.moverse(derecha)})
 	game.onCollideDo(principal, {game.colliders(principal).forEach({elemento => elemento.colisionar()})})
 
+	game.addVisual(obstaculo.nuevo(game.at(0,0), "assets/objetos/Sprite-test-Moneda.png"))
+	game.addVisualCharacter("assets/principal/standing_Right.png")	
 	
 	//start
 	game.start()
