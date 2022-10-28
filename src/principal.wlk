@@ -16,6 +16,7 @@ object principal {
 	method avanzar(direccion) {
 		self.position(direccion.posicion(self.position()))
 	}
+	
 
 }
 
