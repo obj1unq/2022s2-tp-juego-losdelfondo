@@ -5,7 +5,7 @@ object principal {
 
 	var property position = game.center()
 
-	method image() = "milei/quieto_mirando_derecha.png"
+	method image() = "principal/quieto_mirando_derecha.png"
 
 	method moverse(direccion) {
 		if (direccion.puedeMoverseA(self)) {

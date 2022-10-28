@@ -1,16 +1,26 @@
 import wollok.game.*
 
-object milei {
+class Enemigo {
+	
+	method image()
+	
+	method sePuedeAtravesar()
+}
 
-	var property position = game.at(0,0)
+object milei inherits Enemigo{
+	
+	var property position = game.at(0,10)
 
-	method image() = "milei/standing_Right.png"
+	override method image() = "milei/quieto_mirando_derecha.png"
+	
+	override method sePuedeAtravesar() = true
 
 }
-object fidel {
+object fidel inherits Enemigo{
 
-	var property position = game.at(0,29)
+	var property position = game.at(20,20)
 
-	method image() = "old_Man/standing_Right.png"
-
+	override method image() = "old_man/quieto_mirando_derecha.png"
+	
+	override method sePuedeAtravesar() = true
 }
