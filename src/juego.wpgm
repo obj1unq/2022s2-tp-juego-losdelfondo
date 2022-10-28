@@ -11,6 +11,9 @@ program juego {
 	game.width(30)
 	game.addVisualCharacter(principal)
 	
+	//configuracion
+
+	
 	
 	//movimiento
 	keyboard.w().onPressDo({principal.moverse(arriba)})
