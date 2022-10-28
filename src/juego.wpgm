@@ -1,6 +1,7 @@
 import wollok.game.*
 import principal.*
 import direcciones.*
+import enemigos.*
 
 program juego {
 	
@@ -10,6 +11,8 @@ program juego {
 	game.height(30)
 	game.width(30)
 	game.addVisualCharacter(principal)
+	game.addVisual(milei)
+	game.addVisual(fidel)
 	
 	
 	//movimiento
