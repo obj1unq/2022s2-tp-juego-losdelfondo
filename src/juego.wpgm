@@ -1,23 +1,31 @@
 import wollok.game.*
 import principal.*
 import direcciones.*
+import enemigos.*
+import obstaculos.*
+import testMapa.*
 
 program juego {
 	
 	//init nivel
 	game.title("juego Base")
-	game.cellSize(20)
+	game.cellSize(50)
 	game.height(30)
 	game.width(30)
-	game.addVisualCharacter(principal)
+	game.addVisual(principal)
+	game.addVisual(milei)
+	game.addVisual(fidel)
 	
+	//configuracion
+	pincel.pintarVerticalmente(10, 10, 15, obstaculo)
+	//pincel.pintarHorizontalmente(0, 0, 10, "assets/objetos/Sprite-test-Moneda.png")
 	
 	//movimiento
 	keyboard.w().onPressDo({principal.moverse(arriba)})
 	keyboard.a().onPressDo({principal.moverse(izquierda)})
 	keyboard.s().onPressDo({principal.moverse(abajo)})
-	keyboard.d().onPressDo({principal.moverse(derecha)})
-	game.onCollideDo(principal, {game.colliders(principal).forEach({elemento => elemento.colisionar()})})
+	keyboard.d().onPressDo({principal.moverse(derecha)}
+//	game.onCollideDo(principal, {game.colliders(principal).forEach({elemento => elemento.colisionar()})})
 
 	
 	//start
