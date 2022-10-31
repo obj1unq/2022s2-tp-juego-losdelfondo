@@ -3,6 +3,14 @@ import direcciones.*
 
 class Individuo {
 	
+	var property position = game.center()
+	
+	var vida = 100
+	
+	method vida() {
+		return vida
+	}
+	
 	method image()
 	
 	method sePuedeAtravesar()
@@ -16,10 +24,15 @@ class Individuo {
 	method avanzar(direccion) {
 		self.position(direccion.posicion(self.position()))
 	}
+	
+	method colisionarCon(individuo) = game.colliders(individuo).forEach({cosa => cosa.colisionar()})
+	
+	
 }
 
 class Enemigo inherits Individuo {
-	  	
+	
+		
 	method direccionMasConveniente(direcciones){ 
 		return direcciones.min{ direccion => direccion.posicion(self.position()).distance(principal.position()) }
 	}
@@ -35,12 +48,9 @@ class Enemigo inherits Individuo {
 	
 }
 
-
 // TAL VEZ CREAR UN FACTORY PARA ESTOS INDIVIDUOS
 
 object milei inherits Enemigo{
-	
-	var property position = game.at(0,10)
 
 	override method image() = "milei/quieto_mirando_derecha.png"
 	
