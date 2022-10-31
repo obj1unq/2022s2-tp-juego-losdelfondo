@@ -27,7 +27,7 @@ program juego {
 	keyboard.d().onPressDo({principal.moverse(derecha)})
 //	game.onCollideDo(principal, {game.colliders(principal).forEach({elemento => elemento.colisionar()})})
 	game.onTick(1000, "movimiento de enemigos", { => fidel.moverHaciaJugador()})
-	game.onCollideDo(principal, principal.colisionarCon(principal))
+	game.onCollideDo(principal, principal.colisiones(principal))
 
 	
 	//start
