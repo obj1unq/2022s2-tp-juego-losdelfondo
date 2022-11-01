@@ -28,7 +28,11 @@ class Individuo {
 
 	method colisionar(colisionado) {
 		self.colisionarCon(colisionado)
-		colisionado.colisionar(self)
+		colisionado.colisionarCon(self)
+	}
+
+	method recibirDanio(cantidad) {
+		vida = vida - cantidad
 	}
 
 	method colisionarCon(colisionado)
@@ -55,29 +59,43 @@ class Enemigo inherits Individuo {
 // TAL VEZ CREAR UN FACTORY PARA ESTOS INDIVIDUOS
 object milei inherits Enemigo {
 
+	var property armadura = 1.2
+	var property danio = 3.75
+
 	override method image() = "milei/quieto_mirando_derecha.png"
 
 	override method sePuedeAtravesar() = true
+	
+	override method recibirDanio(cantidad) {
+		vida 
+	}
+
+	override method colisionarCon(enemigo) {} // TODO PLANTEAR COMPORTAMIENTO	
 
 }
 
 object fidel inherits Enemigo {
 
-	var property position = game.at(5, 10)
+	var property armadura = 2
+	var property danio = 10
 
 	override method image() = "old_man/quieto_mirando_derecha.png"
 
 	override method sePuedeAtravesar() = true
 
+	override method colisionarCon(enemigo) {} // TODO PLANTEAR COMPORTAMIENTO
+
 }
 
 object principal inherits Individuo {
 
-	var property position = game.center()
-
 	method image() = "principal/quieto_mirando_derecha.png"
 
 	override method sePuedeAtravesar() = true
+
+	override method colisionarCon(enemigo) {
+		vida = vida - enemigo.danio()
+	}
 
 }
 
