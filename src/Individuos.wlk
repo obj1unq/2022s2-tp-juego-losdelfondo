@@ -3,12 +3,10 @@ import direcciones.*
 
 class Individuo {
 
+	var property armadura = 1
+	var property vida = 100
+	var property danio = 2
 	var property position = game.center()
-	var vida = 100
-
-	method vida() {
-		return vida
-	}
 
 	method image()
 
@@ -24,18 +22,24 @@ class Individuo {
 		self.position(direccion.posicion(self.position()))
 	}
 
-	method colisiones(individuo) = game.colliders(individuo).forEach({ cosa => cosa.colisionar(individuo) })
+	method colisiones() {
+		game.colliders(self).forEach({ cosa => self.colisionar(cosa)})
+	}
 
 	method colisionar(colisionado) {
 		self.colisionarCon(colisionado)
 		colisionado.colisionarCon(self)
 	}
 
-	method recibirDanio(cantidad) {
-		vida = vida - cantidad
+	method colisionarCon(colisionado)
+
+	method vida() {
+		return vida
 	}
 
-	method colisionarCon(colisionado)
+	method recibirDanio(cantidad) {
+		vida = vida - (cantidad / armadura)
+	}
 
 }
 
@@ -59,42 +63,44 @@ class Enemigo inherits Individuo {
 // TAL VEZ CREAR UN FACTORY PARA ESTOS INDIVIDUOS
 object milei inherits Enemigo {
 
-	var property armadura = 1.2
-	var property danio = 3.75
-
+//	var armadura = 1.2
+//	var danio 	 = 3.75
 	override method image() = "milei/quieto_mirando_derecha.png"
 
 	override method sePuedeAtravesar() = true
-	
-	override method recibirDanio(cantidad) {
-		vida 
-	}
 
-	override method colisionarCon(enemigo) {} // TODO PLANTEAR COMPORTAMIENTO	
+	override method colisionarCon(enemigo) {
+	} // TODO PLANTEAR COMPORTAMIENTO	
 
 }
 
 object fidel inherits Enemigo {
 
-	var property armadura = 2
-	var property danio = 10
-
+//	var property armadura = 2
+//	var property danio = 10
 	override method image() = "old_man/quieto_mirando_derecha.png"
 
 	override method sePuedeAtravesar() = true
 
-	override method colisionarCon(enemigo) {} // TODO PLANTEAR COMPORTAMIENTO
+	override method colisionarCon(enemigo) {
+	} // TODO PLANTEAR COMPORTAMIENTO
+
+	override method recibirDanio(cantidad) {
+		vida = vida - (cantidad / armadura)
+	}
 
 }
 
 object principal inherits Individuo {
 
-	method image() = "principal/quieto_mirando_derecha.png"
+	override method image() = "principal/quieto_mirando_derecha.png"
 
 	override method sePuedeAtravesar() = true
 
 	override method colisionarCon(enemigo) {
-		vida = vida - enemigo.danio()
+		super(enemigo)
+	;
+		game.say(self, "colisione con" + game.uniqueCollider(self))
 	}
 
 }

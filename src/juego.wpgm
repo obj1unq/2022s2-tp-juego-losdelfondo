@@ -17,7 +17,7 @@ program juego {
 	
 
 	//configuracion
-	pincel.pintarVerticalmente(10, 10, 15, obstaculo)
+//	pincel.pintarVerticalmente(10, 10, 15, obstaculo)
 	//pincel.pintarHorizontalmente(0, 0, 10, "assets/objetos/Sprite-test-Moneda.png")
 	
 	//movimiento
@@ -25,8 +25,8 @@ program juego {
 	keyboard.a().onPressDo({principal.moverse(izquierda)})
 	keyboard.s().onPressDo({principal.moverse(abajo)})
 	keyboard.d().onPressDo({principal.moverse(derecha)})
-	game.onTick(1000, "movimiento de enemigos", { => fidel.moverHaciaJugador()})
-	game.onCollideDo(principal, principal.colisiones(principal))
+	game.onTick(1000, "movimiento de enemigos", {fidel.moverHaciaJugador()})
+	game.onCollideDo(principal, {principal.colisiones()})
 
 	
 	//start
