@@ -22,13 +22,9 @@ class Individuo {
 		self.position(direccion.posicion(self.position()))
 	}
 
-	method colisiones() {
-		game.colliders(self).forEach({ cosa => self.colisionar(cosa)})
-	}
-
 	method colisionar(colisionado) {
 		self.colisionarCon(colisionado)
-		colisionado.colisionarCon(self)
+//		colisionado.colisionarCon(self)
 	}
 
 	method colisionarCon(colisionado)
@@ -78,17 +74,13 @@ object fidel inherits Enemigo {
 
 //	var property armadura = 2
 //	var property danio = 10
+
 	override method image() = "old_man/quieto_mirando_derecha.png"
 
 	override method sePuedeAtravesar() = true
 
 	override method colisionarCon(enemigo) {
-	} // TODO PLANTEAR COMPORTAMIENTO
-
-	override method recibirDanio(cantidad) {
-		vida = vida - (cantidad / armadura)
-	}
-
+	} 
 }
 
 object principal inherits Individuo {
@@ -98,9 +90,9 @@ object principal inherits Individuo {
 	override method sePuedeAtravesar() = true
 
 	override method colisionarCon(enemigo) {
-		super(enemigo)
-	;
-		game.say(self, "colisione con" + game.uniqueCollider(self))
+		self.recibirDanio(enemigo.danio())
+		game.say(self, "me quedan " + self.vida() + " puntos de vida")
+		
 	}
 
 }

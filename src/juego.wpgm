@@ -5,8 +5,7 @@ import obstaculos.*
 import testMapa.*
 
 program juego {
-	
-	//init nivel
+	// init nivel
 	game.title("juego Base")
 	game.cellSize(50)
 	game.height(30)
@@ -15,20 +14,17 @@ program juego {
 	game.addVisual(milei)
 	game.addVisual(fidel)
 	
-
-	//configuracion
-//	pincel.pintarVerticalmente(10, 10, 15, obstaculo)
-	//pincel.pintarHorizontalmente(0, 0, 10, "assets/objetos/Sprite-test-Moneda.png")
-	
-	//movimiento
-	keyboard.w().onPressDo({principal.moverse(arriba)})
-	keyboard.a().onPressDo({principal.moverse(izquierda)})
-	keyboard.s().onPressDo({principal.moverse(abajo)})
-	keyboard.d().onPressDo({principal.moverse(derecha)})
-	game.onTick(1000, "movimiento de enemigos", {fidel.moverHaciaJugador()})
-	game.onCollideDo(principal, {principal.colisiones()})
-
-	
-	//start
+		// configuracion
+		// pincel.pintarVerticalmente(10, 10, 15, obstaculo)
+		// pincel.pintarHorizontalmente(0, 0, 10, "assets/objetos/Sprite-test-Moneda.png")
+		// movimiento
+		
+	keyboard.w().onPressDo({ principal.moverse(arriba) })
+	keyboard.a().onPressDo({ principal.moverse(izquierda) })
+	keyboard.s().onPressDo({ principal.moverse(abajo) })
+	keyboard.d().onPressDo({ principal.moverse(derecha) })
+	game.onTick(2000, "movimiento de enemigos", { fidel.moverHaciaJugador() })
+	game.onCollideDo(principal, { colisionado => principal.colisionar(colisionado) } )
+		// start
 	game.start()
 }
