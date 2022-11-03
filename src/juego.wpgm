@@ -16,7 +16,7 @@ program juego {
 
 	// configuracion
 	// pincel.pintarVerticalmente(10, 10, 15, obstaculo)
-	// pincel.pintarHorizontalmente(0, 0, 10, "assets/objetos/Sprite-test-Moneda.png")
+	// pincel.pintarHorizontalmente(0, 0, 10, obstaculo)
 	
 	// movimiento	
 	keyboard.w().onPressDo({ principal.moverse(arriba) })
