@@ -5,7 +5,7 @@
 - Ferrances Lorenzo
 - Pablo Conde
 - Tomas Gonzalez
-- Matias Gonzalez.
+- Matias Gomez.
 
 ## Capturas
 
