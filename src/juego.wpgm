@@ -1,6 +1,6 @@
 import wollok.game.*
 import direcciones.*
-import Individuos.*
+import Entidades.*
 import obstaculos.*
 import testMapa.*
 
