@@ -93,7 +93,7 @@ class Stalker inherits Enemigo {
 }
 
 // TAL VEZ CREAR UN FACTORY PARA ESTOS INDIVIDUOS
-object milei inherits Enemigo {
+object milei inherits Shooter {
 
 	override method image() = "milei/quieto_mirando_derecha.png"
 
@@ -104,7 +104,7 @@ object milei inherits Enemigo {
 
 }
 
-object fidel inherits Enemigo {
+object fidel inherits Stalker {
 
 	override method image() = "old_man/quieto_mirando_derecha.png"
 
