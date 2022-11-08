@@ -1,16 +1,26 @@
 import wollok.game.*
 import direcciones.*
 
-class Individuo {
+class Entidad {
 
-	var property armadura = 1
-	var property vida = 100
-	var property danio = 2
 	var property position = game.center()
 
 	method image()
 
+	method avanzar(direccion)
+
+	method colisionar(colisionado)
+
+	method colisionarCon(colisionado)
+
 	method sePuedeAtravesar()
+
+}
+
+class Individuo inherits Entidad {
+
+	var property armadura = 0
+	var property vida = 100
 
 	method moverse(direccion) {
 		if (direccion.puedeMoverseA(self)) {
@@ -18,16 +28,14 @@ class Individuo {
 		}
 	}
 
-	method avanzar(direccion) {
+	override method avanzar(direccion) {
 		self.position(direccion.posicion(self.position()))
 	}
 
-	method colisionar(colisionado) {
+	override method colisionar(colisionado) {
 		self.colisionarCon(colisionado)
 //		colisionado.colisionarCon(self)
 	}
-
-	method colisionarCon(colisionado)
 
 	method vida() {
 		return vida
@@ -36,6 +44,8 @@ class Individuo {
 	method recibirDanio(cantidad) {
 		vida = vida - (cantidad / armadura)
 	}
+	
+	override method sePuedeAtravesar() = true
 
 }
 
@@ -44,6 +54,32 @@ class Enemigo inherits Individuo {
 	method direccionMasConveniente(direcciones) {
 		return direcciones.min{ direccion => direccion.posicion(self.position()).distance(principal.position()) }
 	}
+
+	
+
+}
+
+class Proyectil inherits Entidad {
+	
+	var direccionDeMovimiento 
+	
+	override method avanzar(direccion){
+		super(direccionDeMovimiento)
+	}
+}
+
+class Shooter inherits Enemigo {
+
+// determinar si disparar en posicion de PP o moverse 
+// para dispararle manteniendo la distancia 
+	method dispararHaciaJugador() {
+	}
+
+}
+
+class Stalker inherits Enemigo {
+
+	var property danio = 10
 
 	method moverHaciaJugador() {
 		var direccionMasConveniente = self.direccionMasConveniente(self.direccionesAtravesables())
@@ -57,10 +93,8 @@ class Enemigo inherits Individuo {
 }
 
 // TAL VEZ CREAR UN FACTORY PARA ESTOS INDIVIDUOS
-object milei inherits Enemigo {
+object milei inherits Shooter {
 
-//	var armadura = 1.2
-//	var danio 	 = 3.75
 	override method image() = "milei/quieto_mirando_derecha.png"
 
 	override method sePuedeAtravesar() = true
@@ -70,29 +104,22 @@ object milei inherits Enemigo {
 
 }
 
-object fidel inherits Enemigo {
-
-//	var property armadura = 2
-//	var property danio = 10
+object fidel inherits Stalker {
 
 	override method image() = "old_man/quieto_mirando_derecha.png"
 
-	override method sePuedeAtravesar() = true
-
 	override method colisionarCon(enemigo) {
-	} 
+	}
+
 }
 
 object principal inherits Individuo {
 
 	override method image() = "principal/quieto_mirando_derecha.png"
 
-	override method sePuedeAtravesar() = true
-
 	override method colisionarCon(enemigo) {
 		self.recibirDanio(enemigo.danio())
 		game.say(self, "me quedan " + self.vida() + " puntos de vida")
-		
 	}
 
 }

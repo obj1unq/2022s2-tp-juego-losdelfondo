@@ -1,6 +1,6 @@
 import wollok.game.*
 import direcciones.*
-import Individuos.*
+import Entidades.*
 import obstaculos.*
 import testMapa.*
 
@@ -26,7 +26,6 @@ program juego {
 	game.onTick(2000, "movimiento de enemigos", { fidel.moverHaciaJugador() })
 	game.onCollideDo(principal, { colisionado => principal.colisionar(colisionado) } )
 		
-	// start
-	
+	// start	
 	game.start()
 }
