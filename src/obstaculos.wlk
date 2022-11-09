@@ -10,52 +10,26 @@ class Obstaculo {
 	*/
 	var property position = null
 	var property image = null
-	var esTraspasable = false
-	
-	method esTraspasable() {
-		return esTraspasable
-	}
-	
-	method cambiarEstado() {
-		esTraspasable = !self.esTraspasable()
-	}
 	
 	
-	method colisionarCon(objeto) {
-		if(!self.esTraspasable()) {
-			//TODO: No deberia dejar pasar al objeto
-		}
-	}
+	method sePuedeAtravesar() 
+	
 }
 
 class Puerta inherits Obstaculo {
 	
-	override method cambiarEstado(){
+	override method sePuedeAtravesar(){return false}
+	
+	method cambiarEstado(){
 		// Cambia el estado cuando el personaje consigue una llave
 	}
 	
 }
 
-object puerta {
-	/*
-	
-	El objeto peuta define una nueva puerta en el mapa, a partir de una posicion e 
-	imagen dada.
-	
-	*/
-	method nuevo(posicion, imagen) {
-		return (new Puerta(position = posicion, image = imagen))
-	}
+class Muro inherits Obstaculo {
+	override method sePuedeAtravesar(){return false}
 }
 
-object obstaculo {
-	/*
-	
-	El objeto obstaculo define un nuevo obstaculo en el mapa, a partir de una posicion e 
-	imagen dada.
-	
-	*/
-	method nuevo(posicion, imagen) {
-		return game.addVisual(new Obstaculo(position = posicion, image = imagen))
-	}
+class Piso inherits Obstaculo {
+	override method sePuedeAtravesar(){return true}
 }
