@@ -1,23 +1,24 @@
 import wollok.game.*
 import direcciones.*
 import Individuos.*
-import obstaculos.*
+import obstaculosTutorial.*
 import mapaTutorial.*
 
 program juego {
 	
 	//init nivel
 	game.title("juego Base")
-	game.cellSize(50)
 	game.height(30)
 	game.width(30)
-	game.addVisual(principal)
+	
 	game.addVisual(milei)
 	game.addVisual(fidel)
 	
 
 	//configuracion
-	mapaTutorial.setearMarcoInicial(28, 28, obstaculo)
+	configuracionMapaTutorial.cargarMapaTutorial()
+	game.addVisual(principal)
+	
 	
 	//movimiento
 	keyboard.w().onPressDo({principal.moverse(arriba)})
