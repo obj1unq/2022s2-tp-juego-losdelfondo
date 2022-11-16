@@ -2,6 +2,8 @@ import wollok.game.*
 import direcciones.*
 
 class Entidad {
+	
+	var property direccion = abajo
 
 	var property position = game.center()
 
@@ -17,7 +19,6 @@ class Entidad {
 
 class Individuo inherits Entidad {
 
-	var property armadura = 0
 	var property vida = 100
 
 	method moverse(direccion) {
@@ -35,14 +36,14 @@ class Individuo inherits Entidad {
 	}
 
 	method recibirDanio(cantidad) {
-		vida = vida - (cantidad / armadura)
+		vida = vida - cantidad 
 	}
-
-	override method sePuedeAtravesar() = true
 
 }
 
 class Enemigo inherits Individuo {
+
+	var property armadura = 0
 
 	method direccionMasConveniente(direcciones) {
 		return direcciones.min{ direccion => direccion.posicion(self.position()).distance(principal.position()) }
@@ -83,37 +84,15 @@ class Proyectil inherits Entidad {
 
 class Shooter inherits Enemigo {
 	
+	var property danio
 	
-
-// determinar si disparar en posicion de PP o moverse 
-// para dispararle manteniendo la distancia 
-//	method dispararHaciaJugador() {
-//		if (self.estaEnLineaConJugador()) {
-//			self.lanzarProyectil(self.direccionADisparar(principal))
-//		} else {
-//		// deberia moverse para estar en linea con el jugador
-//		}
-//	}
-
-	method estaEnLineaConJugador() {
-		return (self.estaEnMismaFilaConJugador() or self.estaEnMismaColumnaConJugador())
-	}
-
-	method estaEnMismaFilaConJugador() {
-		return ( self.position().x() == principal.position().x() )
-	}
-
-	method estaEnMismaColumnaConJugador() {
-		return ( self.position().y() == principal.position().y() )
-	}
+	var property direccionALaQueApunta 
+	
+	override method sePuedeAtravesar() = true
 
 	method lanzarProyectil(direccion) {
-		const bala = new Proyectil(direccionDeMovimiento = direccion, danio = 15)
-		game.addVisualIn(bala, direccion.posicion(self.position()))
-	}
-
-	method direccionADisparar(individuo) {
-		// TODO buscar como retornar la direccion necesaria
+		const bala = new Proyectil(direccionDeMovimiento = direccionALaQueApunta, danio = danio)
+		game.addVisualIn(bala, direccionALaQueApunta.posicion(self.position()))
 	}
 
 }
@@ -122,24 +101,10 @@ class Stalker inherits Enemigo {
 
 	var property danio = 10
 
-//
-}
-
-// TAL VEZ CREAR UN FACTORY PARA ESTOS INDIVIDUOS
-object milei inherits Shooter {
-
-	override method image() = "milei/quieto_mirando_derecha.png"
-
-	override method sePuedeAtravesar() = true
-
-	override method colisionarCon(enemigo) {
-	} // TODO PLANTEAR COMPORTAMIENTO	
-
+	override method sePuedeAtravesar()= true
 }
 
 object fidel inherits Stalker {
-	
-	override method position() = game.at(1,1)
 
 	override method image() = "old_man/quieto_mirando_derecha.png"
 
@@ -150,7 +115,7 @@ object fidel inherits Stalker {
 
 object principal inherits Individuo {
 	
-	override method position() = game.at(15,15)
+	override method sePuedeAtravesar()= true
 
 	override method image() = "principal/quieto_mirando_derecha.png"
 
