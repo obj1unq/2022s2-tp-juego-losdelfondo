@@ -10,12 +10,10 @@ program juego {
 	game.height(30)
 	game.width(30)
 	
-	game.addVisual(milei)
-	game.addVisual(fidel)
-	
-
 	//configuracion
 	configuracionMapaTutorial.cargarMapaTutorial()
+	game.addVisual(milei)
+	game.addVisual(fidel)
 	game.addVisual(principal)
 	
 	
