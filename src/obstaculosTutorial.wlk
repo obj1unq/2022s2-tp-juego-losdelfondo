@@ -44,3 +44,31 @@ object muroOeste {
 		return game.addVisual(new Muro(position = posicion, image="assets/muros/shallow_water_wave_east_new.png"))
 	}
 }
+
+object muroNoroOeste {
+	/*El objeto obstaculo define un nuevo obstaculo en el mapa, a partir de una posicion.*/
+	method nuevo(posicion) {
+		return game.addVisual(new Muro(position = posicion, image="assets/muros/shallow_water_wave_corner_southeast_new.png"))
+	}
+}
+
+object muroSuroOeste {
+	/*El objeto obstaculo define un nuevo obstaculo en el mapa, a partir de una posicion.*/
+	method nuevo(posicion) {
+		return game.addVisual(new Muro(position = posicion, image="assets/muros/shallow_water_wave_corner_northeast_new.png"))
+	}
+}
+
+object muroNoroEste {
+	/*El objeto obstaculo define un nuevo obstaculo en el mapa, a partir de una posicion.*/
+	method nuevo(posicion) {
+		return game.addVisual(new Muro(position = posicion, image="assets/muros/shallow_water_wave_corner_southwest_new.png"))
+	}
+}
+
+object muroSuroEste {
+	/*El objeto obstaculo define un nuevo obstaculo en el mapa, a partir de una posicion.*/
+	method nuevo(posicion) {
+		return game.addVisual(new Muro(position = posicion, image="assets/muros/shallow_water_wave_corner_northwest_new.png"))
+	}
+}

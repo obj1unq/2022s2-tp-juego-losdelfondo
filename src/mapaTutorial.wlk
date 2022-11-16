@@ -10,9 +10,27 @@ object configuracionMapaTutorial {
 	const mapaTutorial = new Mapa()
 	
 	method cargarMapaTutorial(){
-		const listaMuros = [muroNorte, muroSur, muroOeste, muroEste]
-		mapaTutorial.setearMarcoInicial(15, 15, listaMuros)	
-		mapaTutorial.colocarPiso(13, 13, piso)
+		const listaMuros = [muroNorte, muroSur, muroOeste, muroEste, muroSuroOeste, muroNoroOeste, muroNoroEste, muroSuroEste]
+		mapaTutorial.setearMarcoInicial(23, 23, listaMuros)	
+		mapaTutorial.colocarPiso(21, 21, piso) // Setear el piso 2 numeros menos que el marco del mapa
+		self.colocarHabitacionSpawn()
+		self.colocarHabitacionDisparo()
+		self.colocarHabitacionPelea()
 	}
 	
+	method colocarHabitacionSpawn(){
+		pincel.pintarVerticalmente(16,25, 23, muroOeste)
+		pincel.pintarVerticalmente(16,21, 19, muroOeste)
+		pincel.pintarHorizontalmente(15,18, 25, muroSur)
+	}
+	
+	method colocarHabitacionDisparo(){
+		pincel.pintarHorizontalmente(15,18, 8, muroSur)
+		pincel.pintarHorizontalmente(6,18, 5, muroSur)
+	}
+	
+	method colocarHabitacionPelea(){
+		pincel.pintarVerticalmente(16,19, 13, muroOeste)
+		pincel.pintarVerticalmente(16,11, 5, muroOeste)
+	}
 }
