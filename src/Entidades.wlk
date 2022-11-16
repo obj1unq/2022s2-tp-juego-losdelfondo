@@ -9,8 +9,6 @@ class Entidad {
 
 	method avanzar(direccion)
 
-	method colisionar(colisionado)
-
 	method colisionarCon(colisionado)
 
 	method sePuedeAtravesar()
@@ -32,11 +30,6 @@ class Individuo inherits Entidad {
 		self.position(direccion.posicion(self.position()))
 	}
 
-	override method colisionar(colisionado) {
-		self.colisionarCon(colisionado)
-//		colisionado.colisionarCon(self)
-	}
-
 	method vida() {
 		return vida
 	}
@@ -44,7 +37,7 @@ class Individuo inherits Entidad {
 	method recibirDanio(cantidad) {
 		vida = vida - (cantidad / armadura)
 	}
-	
+
 	override method sePuedeAtravesar() = true
 
 }
@@ -55,32 +48,6 @@ class Enemigo inherits Individuo {
 		return direcciones.min{ direccion => direccion.posicion(self.position()).distance(principal.position()) }
 	}
 
-	
-
-}
-
-class Proyectil inherits Entidad {
-	
-	var direccionDeMovimiento 
-	
-	override method avanzar(direccion){
-		super(direccionDeMovimiento)
-	}
-}
-
-class Shooter inherits Enemigo {
-
-// determinar si disparar en posicion de PP o moverse 
-// para dispararle manteniendo la distancia 
-	method dispararHaciaJugador() {
-	}
-
-}
-
-class Stalker inherits Enemigo {
-
-	var property danio = 10
-
 	method moverHaciaJugador() {
 		var direccionMasConveniente = self.direccionMasConveniente(self.direccionesAtravesables())
 		self.moverse(direccionMasConveniente)
@@ -90,6 +57,72 @@ class Stalker inherits Enemigo {
 		return [ izquierda, arriba, abajo, derecha ].filter({ direccion => direccion.puedeMoverseA(self) })
 	}
 
+}
+
+class Proyectil inherits Entidad {
+	
+	var danio
+
+	var direccionDeMovimiento
+
+	override method image() = {// buscar foto de proyectil
+	}
+	
+	override method colisionarCon(individuo){
+		game.removeVisual(self)
+	}
+
+
+	override method avanzar(direccion) {
+		super(direccionDeMovimiento)
+	}
+	
+	override method sePuedeAtravesar() = true
+	
+}
+
+class Shooter inherits Enemigo {
+	
+	
+
+// determinar si disparar en posicion de PP o moverse 
+// para dispararle manteniendo la distancia 
+//	method dispararHaciaJugador() {
+//		if (self.estaEnLineaConJugador()) {
+//			self.lanzarProyectil(self.direccionADisparar(principal))
+//		} else {
+//		// deberia moverse para estar en linea con el jugador
+//		}
+//	}
+
+	method estaEnLineaConJugador() {
+		return (self.estaEnMismaFilaConJugador() or self.estaEnMismaColumnaConJugador())
+	}
+
+	method estaEnMismaFilaConJugador() {
+		return ( self.position().x() == principal.position().x() )
+	}
+
+	method estaEnMismaColumnaConJugador() {
+		return ( self.position().y() == principal.position().y() )
+	}
+
+	method lanzarProyectil(direccion) {
+		const bala = new Proyectil(direccionDeMovimiento = direccion, danio = 15)
+		game.addVisualIn(bala, direccion.posicion(self.position()))
+	}
+
+	method direccionADisparar(individuo) {
+		// TODO buscar como retornar la direccion necesaria
+	}
+
+}
+
+class Stalker inherits Enemigo {
+
+	var property danio = 10
+
+//
 }
 
 // TAL VEZ CREAR UN FACTORY PARA ESTOS INDIVIDUOS
@@ -105,6 +138,8 @@ object milei inherits Shooter {
 }
 
 object fidel inherits Stalker {
+	
+	override method position() = game.at(1,1)
 
 	override method image() = "old_man/quieto_mirando_derecha.png"
 
@@ -114,8 +149,15 @@ object fidel inherits Stalker {
 }
 
 object principal inherits Individuo {
+	
+	override method position() = game.at(15,15)
 
 	override method image() = "principal/quieto_mirando_derecha.png"
+
+	method colisionar(colisionado){
+		self.colisionarCon(colisionado)
+		colisionado.colisionarCon(self)
+	}
 
 	override method colisionarCon(enemigo) {
 		self.recibirDanio(enemigo.danio())
