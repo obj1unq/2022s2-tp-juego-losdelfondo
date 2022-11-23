@@ -17,6 +17,7 @@ class Individuo inherits Entidad {
 	var property vida = 100
 
 	method image() = nombre.toString() + "/" + "quieto_mirando_" + direccionALaQueMira.toString() + ".png"
+	// TODO cambiar nombre de assets y borrar pasos intermedios
 
 	method colisionarCon(colisionado)
 
@@ -50,6 +51,8 @@ class Enemigo inherits Individuo {
 }
 
 class Proyectil inherits Individuo {
+	
+	override method image() = "objetos" + "/Sprite-test-Moneda.png"
 
 	override method colisionarCon(individuo) {
 		game.removeVisual(self)
@@ -66,13 +69,16 @@ class Proyectil inherits Individuo {
 
 class Shooter inherits Enemigo {
 
-	const balas = []
+	const property balas = []
 
 	override method sePuedeAtravesar() = true
 
 	method lanzarProyectil(direccion) {
-		balas.add(new Proyectil(direccionALaQueMira = direccion, danio = danio, nombre = "bala"))
-		game.addVisualIn(balas.last(), direccion.posicion(self.position()))
+		
+		const bala = new Proyectil(direccionALaQueMira = direccion, danio = danio, nombre = "bala")
+		balas.add(bala)
+		game.addVisualIn(bala, direccion.posicion(self.position()))
+		game.say(shooter, "ahora hay " + balas.size() + "balas en el juego" )
 	// como hacer para instanciar, meterlo a una coleccion y no usar "bala" para nombrarlos a todos?
 	}
 
@@ -80,8 +86,9 @@ class Shooter inherits Enemigo {
 	}
 
 	override method accionar() {
-		balas.forEach({ bala => bala.moverse(direccionALaQueMira)})
+		balas.forEach({ bala => bala.avanzar(bala.direccionALaQueMira())})
 		self.lanzarProyectil(direccionALaQueMira)
+
 	}
 
 }
