@@ -37,6 +37,8 @@ class Individuo inherits Entidad {
 	method recibirDanio(cantidad) {
 		vida = vida - cantidad
 	}
+	
+	method accionar()
 
 }
 
@@ -54,7 +56,7 @@ class Proyectil inherits Individuo {
 	}
 
 	override method avanzar(direccion) {
-		super(direccionALaQueMira)
+		super(direccion)
 	}
 
 	override method sePuedeAtravesar() = true
@@ -64,6 +66,9 @@ class Proyectil inherits Individuo {
 		game.removeVisual(self)
 	}
 
+	override method accionar(){
+		self.avanzar(direccionALaQueMira)
+	}
 }
 
 class Shooter inherits Enemigo {
@@ -71,12 +76,19 @@ class Shooter inherits Enemigo {
 	override method sePuedeAtravesar() = true
 
 	method lanzarProyectil(direccion) {
-		const bala = new Proyectil(direccionALaQueMira = direccionALaQueMira, danio = danio, nombre = "bala")
-		game.addVisualIn(bala, direccionALaQueMira.posicion(self.position()))
+		const bala = new Proyectil(direccionALaQueMira = direccion, danio = danio, nombre = "bala")
+		game.addVisualIn(bala, direccion.posicion(self.position()))
 	}
-
+ 
 	override method colisionarCon(colision) {
 	}
+	
+	override method accionar(){
+		self.lanzarProyectil(direccionALaQueMira)
+		//TODO hacer que mueva las balas
+	}
+	
+	
 
 }
 
@@ -99,6 +111,10 @@ class Stalker inherits Enemigo {
 
 	override method colisionarCon(colisionado) {
 	}
+	
+	override method accionar(){
+		self.moverHaciaJugador()
+	}
 
 }
 
@@ -115,6 +131,10 @@ class Principal inherits Individuo {
 	override method colisionarCon(enemigo) {
 		self.recibirDanio(enemigo.danio())
 		}
+		
+	override method accionar(){
+		//curarse pasivamente?
+	}
 
 }
 

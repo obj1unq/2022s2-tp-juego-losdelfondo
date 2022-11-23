@@ -17,18 +17,20 @@ program juego {
 	
 	
 	//configuracion
+	const entidades = #{} 
 	configuracionMapaTutorial.cargarMapaTutorial()
 	game.addVisual(fidel)
 	game.addVisual(principal)
 	game.addVisual(milei)
-	
+	entidades.add(milei)
+	entidades.add(fidel)	
 	
 	//movimiento
 	keyboard.w().onPressDo({principal.moverse(arriba)})
 	keyboard.a().onPressDo({principal.moverse(izquierda)})
 	keyboard.s().onPressDo({principal.moverse(abajo)})
 	keyboard.d().onPressDo({principal.moverse(derecha)})
-	game.onTick(2000, "movimiento de enemigos", { fidel.moverHaciaJugador() })
+	game.onTick(2000, "accionar cosas", {entidades.forEach({ent => ent.accionar()})})
 	game.onCollideDo(principal, { colisionado => principal.colisionar(colisionado) } )
 		
 	// start	
