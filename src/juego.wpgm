@@ -17,7 +17,7 @@ program juego {
 	
 	
 	//configuracion
-	const entidades = #{} 
+	const entidades = []
 	configuracionMapaTutorial.cargarMapaTutorial()
 	game.addVisual(fidel)
 	game.addVisual(principal)

@@ -3,7 +3,7 @@ import direcciones.*
 
 class Entidad {
 
-	var property nombre 
+	var property nombre
 	var property direccionALaQueMira = abajo
 	var property position = game.center()
 	var property danio
@@ -37,8 +37,6 @@ class Individuo inherits Entidad {
 	method recibirDanio(cantidad) {
 		vida = vida - cantidad
 	}
-	
-	method accionar()
 
 }
 
@@ -47,48 +45,44 @@ class Enemigo inherits Individuo {
 	var property armadura = 0
 	const property objetivo
 
+	method accionar()
+
 }
 
 class Proyectil inherits Individuo {
 
 	override method colisionarCon(individuo) {
 		game.removeVisual(self)
-	}
-
-	override method avanzar(direccion) {
-		super(direccion)
-	}
+	} 
 
 	override method sePuedeAtravesar() = true
-	
-	override method danio(){
-		super()
+
+	override method danio() {
 		game.removeVisual(self)
+		return (super())
 	}
 
-	override method accionar(){
-		self.avanzar(direccionALaQueMira)
-	}
 }
 
 class Shooter inherits Enemigo {
 
+	const balas = []
+
 	override method sePuedeAtravesar() = true
 
 	method lanzarProyectil(direccion) {
-		const bala = new Proyectil(direccionALaQueMira = direccion, danio = danio, nombre = "bala")
-		game.addVisualIn(bala, direccion.posicion(self.position()))
+		balas.add(new Proyectil(direccionALaQueMira = direccion, danio = danio, nombre = "bala"))
+		game.addVisualIn(balas.last(), direccion.posicion(self.position()))
+	// como hacer para instanciar, meterlo a una coleccion y no usar "bala" para nombrarlos a todos?
 	}
- 
+
 	override method colisionarCon(colision) {
 	}
-	
-	override method accionar(){
+
+	override method accionar() {
+		balas.forEach({ bala => bala.moverse(direccionALaQueMira)})
 		self.lanzarProyectil(direccionALaQueMira)
-		//TODO hacer que mueva las balas
 	}
-	
-	
 
 }
 
@@ -111,8 +105,8 @@ class Stalker inherits Enemigo {
 
 	override method colisionarCon(colisionado) {
 	}
-	
-	override method accionar(){
+
+	override method accionar() {
 		self.moverHaciaJugador()
 	}
 
@@ -130,10 +124,6 @@ class Principal inherits Individuo {
 
 	override method colisionarCon(enemigo) {
 		self.recibirDanio(enemigo.danio())
-		}
-		
-	override method accionar(){
-		//curarse pasivamente?
 	}
 
 }
