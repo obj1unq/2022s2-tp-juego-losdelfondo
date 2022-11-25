@@ -18,7 +18,7 @@ program juego {
 	
 	//configuracion
 	const entidades = []
-//	configuracionMapaTutorial.cargarMapaTutorial() TODO remover el disenio del piso como un objeto
+	configuracionMapaTutorial.cargarMapaTutorial() //TODO remover el disenio del piso como un objeto
 	game.addVisual(fidel)
 	game.addVisual(principal)
 	game.addVisual(milei)
