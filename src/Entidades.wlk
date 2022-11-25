@@ -16,7 +16,7 @@ class Individuo inherits Entidad {
 
 	var property vida = 100
 
-	method image() = nombre.toString() + "/" + "quieto_mirando_" + direccionALaQueMira.toString() + ".png"
+	method image() = self.visualPosicionado()
 	// TODO cambiar nombre de assets y borrar pasos intermedios
 
 	method colisionarCon(colisionado)
@@ -25,10 +25,12 @@ class Individuo inherits Entidad {
 		if (direccion.puedeMoverseA(self)) {
 			self.avanzar(direccion)
 		}
+		self.visualPosicionado()
 	}
 
 	method avanzar(direccion) {
 		self.position(direccion.posicion(self.position()))
+		
 	}
 
 	method vida() {
@@ -37,6 +39,10 @@ class Individuo inherits Entidad {
 
 	method recibirDanio(cantidad) {
 		vida = vida - cantidad
+	}
+	
+	method visualPosicionado(){
+		return (self.nombre().toString() + "/" + self.direccionALaQueMira().toString() + ".png")
 	}
 
 }
@@ -52,7 +58,7 @@ class Enemigo inherits Individuo {
 
 class Proyectil inherits Individuo {
 	
-	override method image() = "objetos" + "/Sprite-test-Moneda.png"
+	override method image() = self.visualPosicionado()
 
 	override method colisionarCon(individuo) {
 		game.removeVisual(self)
@@ -78,8 +84,7 @@ class Shooter inherits Enemigo {
 		const bala = new Proyectil(direccionALaQueMira = direccion, danio = danio, nombre = "bala")
 		balas.add(bala)
 		game.addVisualIn(bala, direccion.posicion(self.position()))
-		game.say(shooter, "ahora hay " + balas.size() + "balas en el juego" )
-	// como hacer para instanciar, meterlo a una coleccion y no usar "bala" para nombrarlos a todos?
+		// como hacer para instanciar, meterlo a una coleccion y no usar "bala" para nombrarlos a todos?
 	}
 
 	override method colisionarCon(colision) {
@@ -122,8 +127,6 @@ class Stalker inherits Enemigo {
 class Principal inherits Individuo {
 
 	override method sePuedeAtravesar() = true
-
-	override method image() = "principal/quieto_mirando_derecha.png"
 
 	method colisionar(colisionado) {
 		self.colisionarCon(colisionado)
