@@ -11,14 +11,14 @@ program juego {
 	game.width(30)
 	
 	//Personajes
-	const principal = new Principal(danio = 10, nombre = "principal")
+	const principal = new Principal(danio = 50, nombre = "principal")
 	const milei = new Shooter(danio = 10, objetivo = principal, nombre = "milei")
 	const fidel = new Stalker(danio = 10, objetivo = principal, nombre = "fidel")
 	
 	
 	//configuracion
 	const entidades = []
-	configuracionMapaTutorial.cargarMapaTutorial() //TODO remover el disenio del piso como un objeto
+//	configuracionMapaTutorial.cargarMapaTutorial() //TODO remover el disenio del piso como un objeto
 	game.addVisual(fidel)
 	game.addVisual(principal)
 	game.addVisual(milei)

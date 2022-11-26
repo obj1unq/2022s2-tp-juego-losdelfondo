@@ -17,6 +17,9 @@ class Entidad {
 
 	method recibirDanio(cantidad) {
 		vida = vida - cantidad
+		if(vida <= 0){
+			self.morirme()
+		} else {}
 	}
 
 	method visualPosicionado() {
@@ -24,6 +27,10 @@ class Entidad {
 	}
 
 	method image() = self.visualPosicionado()
+	
+	method morirme(){
+		game.removeVisual(self)
+	}
 
 }
 
@@ -68,11 +75,11 @@ class Proyectil inherits Individuo {
 	}
 	
 	override method noPudeAvanzar(direccion){
-		self.removerme()
+		self.morirme()
 	}
 	
-	method removerme(){
-		game.removeVisual(self)
+	override method morirme(){
+		super()
 		game.removeTickEvent("movimiento de proyectil" + nombre.toString())
 		
 	}
@@ -86,13 +93,15 @@ class Proyectil inherits Individuo {
 	override method sePuedeAtravesar() = true
 
 	override method danio() {
-		self.removerme()
+		self.morirme()
 		return (super())
 	}
 
 }
 
 class Shooter inherits Enemigo {
+	
+	var cantidadDeBalas = 0
 	
 	override method moverse(direccion) {}
 	
@@ -101,8 +110,9 @@ class Shooter inherits Enemigo {
 	override method sePuedeAtravesar() = false
 
 	method lanzarProyectil(direccion) {
-		const bala = new Proyectil(direccionALaQueMira = direccion, danio = danio, nombre = "bala")
+		const bala = new Proyectil(direccionALaQueMira = direccion, danio = danio, nombre = "bala" + cantidadDeBalas.toString())
 		bala.serDisparadoPor(self)
+		cantidadDeBalas+= 1
 	}
 
 	override method accionar() {
