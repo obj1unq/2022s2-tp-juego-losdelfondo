@@ -164,5 +164,5 @@ class Principal inherits Individuo {
 	}
 
 }
-//
+
 
