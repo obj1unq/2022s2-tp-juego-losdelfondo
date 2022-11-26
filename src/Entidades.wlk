@@ -32,10 +32,15 @@ class Individuo inherits Entidad {
 	method colisionarCon(colisionado){}
 
 	method moverse(direccion) {
+		direccionALaQueMira = direccion
 		if (direccion.puedeMoverseA(self)) {
 			self.avanzar(direccion)
+		} else {
+			self.noPudeAvanzar(direccion)
 		}
 	}
+	
+	method noPudeAvanzar(direccion){}
 
 	method avanzar(direccion) {
 		self.position(direccion.posicion(self.position()))
@@ -61,14 +66,15 @@ class Proyectil inherits Individuo {
 	override method colisionarCon(individuo) {
 		game.removeVisual(self)
 	}
-
-	override method moverse(direccion) {
-		if (direccion.puedeMoverseA(self)) {
-			self.avanzar(direccion)
-		} else {
-			game.removeVisual(self)
-			game.removeTickEvent("movimiento de proyectil" + nombre.toString())
-		}
+	
+	override method noPudeAvanzar(direccion){
+		self.removerme()
+	}
+	
+	method removerme(){
+		game.removeVisual(self)
+		game.removeTickEvent("movimiento de proyectil" + nombre.toString())
+		
 	}
 
 	method serDisparadoPor(personaje) {
@@ -80,13 +86,17 @@ class Proyectil inherits Individuo {
 	override method sePuedeAtravesar() = true
 
 	override method danio() {
-		game.removeVisual(self)
+		self.removerme()
 		return (super())
 	}
 
 }
 
 class Shooter inherits Enemigo {
+	
+	override method moverse(direccion) {}
+	
+	override method avanzar(direccion) {}
 
 	override method sePuedeAtravesar() = false
 
@@ -137,6 +147,10 @@ class Principal inherits Individuo {
 
 	override method colisionarCon(enemigo) {
 		self.recibirDanio(enemigo.danio())
+	}
+	
+	method atacar(direccion){
+		game.getObjectsIn(direccion.posicion(self.position())).forEach({objeto => objeto.recibirDanio(danio)})
 	}
 
 }

@@ -30,6 +30,7 @@ program juego {
 	keyboard.a().onPressDo({principal.moverse(izquierda)})
 	keyboard.s().onPressDo({principal.moverse(abajo)})
 	keyboard.d().onPressDo({principal.moverse(derecha)})
+	keyboard.j().onPressDo({principal.atacar(principal.direccionALaQueMira())})
 	game.onTick(2000, "accionar cosas", {entidades.forEach({ent => ent.accionar()})})
 	game.onCollideDo(principal, { colisionado => principal.colisionar(colisionado) } )
 		
