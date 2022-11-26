@@ -155,4 +155,3 @@ class Principal inherits Individuo {
 
 }
 
-// merge 
