@@ -10,27 +10,38 @@ object configuracionMapaTutorial {
 	const mapaTutorial = new Mapa()
 	
 	method cargarMapaTutorial(){
-		const listaMuros = [muroNorte, muroSur, muroOeste, muroEste, muroSuroOeste, muroNoroOeste, muroNoroEste, muroSuroEste]
+		const listaMuros = [muroHorizontal, muroVertical, muroSuroOeste, muroNoroOeste, muroNoroEste, muroSuroEste]
 		mapaTutorial.setearMarcoInicial(23, 23, listaMuros)	
 		mapaTutorial.colocarPiso(21, 21, piso) // Setear el piso 2 numeros menos que el marco del mapa
 		self.colocarHabitacionSpawn()
 		self.colocarHabitacionDisparo()
 		self.colocarHabitacionPelea()
+		pincel.pintar(16, 18, muroCruz)
 	}
 	
 	method colocarHabitacionSpawn(){
-		pincel.pintarVerticalmente(16,25, 23, muroOeste)
-		pincel.pintarVerticalmente(16,21, 19, muroOeste)
-		pincel.pintarHorizontalmente(15,18, 25, muroSur)
+		pincel.pintar(16, 26, muroTNorte)
+		pincel.pintarVerticalmente(16,25, 23, muroVertical)
+		pincel.pintarVerticalmente(16,21, 19, muroVertical)
+		pincel.pintarHorizontalmente(15,18, 25, muroHorizontal)
+		pincel.pintar(26, 18, muroTEste)
+		pincel.pintar(23, 22, spawn)
 	}
 	
 	method colocarHabitacionDisparo(){
-		pincel.pintarHorizontalmente(15,18, 8, muroSur)
-		pincel.pintarHorizontalmente(6,18, 5, muroSur)
+		pincel.pintarHorizontalmente(15,18, 8, muroHorizontal)
+		pincel.pintarHorizontalmente(6,18, 5, muroHorizontal)
+		pincel.pintar(4, 18, muroTOeste)
 	}
 	
 	method colocarHabitacionPelea(){
-		pincel.pintarVerticalmente(16,19, 13, muroOeste)
-		pincel.pintarVerticalmente(16,11, 5, muroOeste)
+		pincel.pintarVerticalmente(16,19, 13, muroVertical)
+		pincel.pintarVerticalmente(16,11, 5, muroVertical)
+		pincel.pintar(16, 4, muroTSur)
+	}
+	
+	method colocarEntidad(entidad, posicion){
+		entidad.position(posicion)
+		game.addVisual(entidad)
 	}
 }

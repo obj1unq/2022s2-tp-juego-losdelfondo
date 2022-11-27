@@ -33,4 +33,5 @@ class Muro inherits Obstaculo {
 class Piso inherits Obstaculo {
 	override method sePuedeAtravesar(){return true}
 	method danio(){return 0}
+	method recibirDanio(cantidad){}
 }
