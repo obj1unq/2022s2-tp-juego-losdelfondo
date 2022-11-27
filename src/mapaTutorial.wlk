@@ -39,4 +39,9 @@ object configuracionMapaTutorial {
 		pincel.pintarVerticalmente(16,11, 5, muroVertical)
 		pincel.pintar(16, 4, muroTSur)
 	}
+	
+	method colocarEntidad(entidad, posicion){
+		entidad.position(posicion)
+		game.addVisual(entidad)
+	}
 }
