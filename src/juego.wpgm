@@ -14,6 +14,7 @@ program juego {
 	//Personajes
 	const principal = new Principal(danio = 50, nombre = "principal") //Esto no tendria que ser un objeto en vez de una clase?
 	const milei = new Shooter(danio = 10, objetivo = principal, nombre = "milei")
+	const maquinaExpendedora = new Shooter(danio= 10, objetivo = principal, nombre ="maquina")
 	const fidel = new Stalker(danio = 10, objetivo = principal, nombre = "fidel")
 	
 	
@@ -21,10 +22,10 @@ program juego {
 	const entidades = []
 	configuracionMapaTutorial.cargarMapaTutorial() //TODO remover el disenio del piso como un objeto
 	configuracionMapaTutorial.colocarEntidad(principal, game.at(23, 22))
-	configuracionMapaTutorial.colocarEntidad(milei, game.at(13, 25))
+	configuracionMapaTutorial.colocarEntidad(maquinaExpendedora, game.at(8, 25))
 	configuracionMapaTutorial.colocarEntidad(fidel, game.at(10, 11))
 	entidades.add(fidel)	
-	entidades.add(milei)
+	entidades.add(maquinaExpendedora)
 	
 	//movimiento
 	keyboard.w().onPressDo({principal.moverse(arriba)})

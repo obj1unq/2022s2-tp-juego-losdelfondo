@@ -1,6 +1,7 @@
 import wollok.game.*
 import obstaculosTutorial.*
 import testMapa.*
+import textos.*
 
 object configuracionMapaTutorial {
 	/*
@@ -26,18 +27,21 @@ object configuracionMapaTutorial {
 		pincel.pintarHorizontalmente(15,18, 25, muroHorizontal)
 		pincel.pintar(26, 18, muroTEste)
 		pincel.pintar(23, 22, spawn)
+		self.colocarEntidad(tutorialMovimiento, game.at(20, 24))
 	}
 	
 	method colocarHabitacionDisparo(){
 		pincel.pintarHorizontalmente(15,18, 8, muroHorizontal)
 		pincel.pintarHorizontalmente(6,18, 5, muroHorizontal)
 		pincel.pintar(4, 18, muroTOeste)
+		self.colocarEntidad(tutorialAtaque, game.at(12, 24))
 	}
 	
 	method colocarHabitacionPelea(){
 		pincel.pintarVerticalmente(16,19, 13, muroVertical)
 		pincel.pintarVerticalmente(16,11, 5, muroVertical)
 		pincel.pintar(16, 4, muroTSur)
+		self.colocarEntidad(escapandoUNQ, game.at(12, 17))
 	}
 	
 	method colocarEntidad(entidad, posicion){
