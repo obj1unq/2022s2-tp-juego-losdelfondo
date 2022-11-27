@@ -6,6 +6,7 @@ import Entidades.*
 
 program juego {
 	// init nivel
+	game.boardGround("assets/extras/fondoMapa.png")
 	game.title("juego Base")
 	game.height(30)
 	game.width(30)
