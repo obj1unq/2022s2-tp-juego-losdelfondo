@@ -12,24 +12,27 @@ program juego {
 	game.width(30)
 	
 	//Personajes
-	const principal = new Principal(danio = 10, nombre = "principal")
+	const principal = new Principal(danio = 50, nombre = "principal")
 	const milei = new Shooter(danio = 10, objetivo = principal, nombre = "milei")
 	const fidel = new Stalker(danio = 10, objetivo = principal, nombre = "fidel")
 	
 	
 	//configuracion
-	configuracionMapaTutorial.cargarMapaTutorial()
+	const entidades = []
+//	configuracionMapaTutorial.cargarMapaTutorial() //TODO remover el disenio del piso como un objeto
 	game.addVisual(fidel)
 	game.addVisual(principal)
 	game.addVisual(milei)
-	
+	entidades.add(fidel)	
+	entidades.add(milei)
 	
 	//movimiento
 	keyboard.w().onPressDo({principal.moverse(arriba)})
 	keyboard.a().onPressDo({principal.moverse(izquierda)})
 	keyboard.s().onPressDo({principal.moverse(abajo)})
 	keyboard.d().onPressDo({principal.moverse(derecha)})
-	game.onTick(2000, "movimiento de enemigos", { fidel.moverHaciaJugador() })
+	keyboard.j().onPressDo({principal.atacar(principal.direccionALaQueMira())})
+	game.onTick(2000, "accionar cosas", {entidades.forEach({ent => ent.accionar()})})
 	game.onCollideDo(principal, { colisionado => principal.colisionar(colisionado) } )
 		
 	// start	
