@@ -95,6 +95,7 @@ class Proyectil inherits Individuo {
 	override method danio() {
 		self.morirme()
 		return (super())
+		
 	}
 
 }
