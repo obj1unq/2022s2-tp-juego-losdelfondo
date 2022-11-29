@@ -58,7 +58,7 @@ class Individuo inherits Entidad {
 class Enemigo inherits Individuo {
 
 	var property armadura = 0
-	const property objetivo
+	const property objetivo = principal
 
 	method accionar()
 
@@ -148,7 +148,9 @@ class Stalker inherits Enemigo {
 
 }
 
-class Principal inherits Individuo {
+//Creacion de objetos
+
+object principal inherits Individuo (danio = 50, nombre = "principal") {
 
 	override method sePuedeAtravesar() = true
 
@@ -165,5 +167,9 @@ class Principal inherits Individuo {
 	}
 
 }
+
+object maquinaExpendedora inherits Shooter (danio = 10, nombre = "maquina") {}
+
+object fidel inherits Stalker(danio = 20, nombre = "fidel") {}
 
 
