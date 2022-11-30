@@ -44,7 +44,8 @@ object configuracionMapaTutorial {
 		self.colocarEntidad(escapandoUNQ, game.at(12, 17))
 	}
 	
-	method colocarEntidad(entidad, posicion){
+	//Esto se puede reemplazar por game.addVisualIn(elemento, posicion)
+	method colocarEntidad(entidad, posicion){ 
 		entidad.position(posicion)
 		game.addVisual(entidad)
 	}
