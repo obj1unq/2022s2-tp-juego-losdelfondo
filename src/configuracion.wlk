@@ -12,13 +12,17 @@ object manager {
 
 	var entidades = [fidel, maquinaExpendedora]
 
-	method colocarPersonajes() {
+	method iniciarPersonajes() {
 		configuracionMapaTutorial.colocarEntidad(principal, game.at(23, 22))
 		configuracionMapaTutorial.colocarEntidad(maquinaExpendedora, game.at(8, 25))
 		configuracionMapaTutorial.colocarEntidad(fidel, game.at(10, 11))
 	}
 
-	method configurarTeclas() {
+	method configurarColisiones(pj){
+		game.onCollideDo(pj, { colisionado => pj.colisionar(colisionado) })
+	}
+
+	method iniciarTeclas() {
 		keyboard.w().onPressDo({ principal.moverse(arriba)})
 		keyboard.a().onPressDo({ principal.moverse(izquierda)})
 		keyboard.s().onPressDo({ principal.moverse(abajo)})

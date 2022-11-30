@@ -15,10 +15,9 @@ program juego {
 
 
 	configuracionMapaTutorial.cargarMapaTutorial() // TODO remover el disenio del piso como un objeto
-	manager.colocarPersonajes()
-	manager.configurarTeclas()
+	manager.iniciarPersonajes()
+	manager.iniciarTeclas()
 	manager.empezarAccion(normal)
-	game.onCollideDo(principal, { colisionado => principal.colisionar(colisionado) })
-
+	manager.configurarColisiones(principal)
 	game.start()
 }
