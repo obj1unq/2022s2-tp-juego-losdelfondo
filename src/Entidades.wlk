@@ -27,22 +27,10 @@ class Entidad {
 			}
 		}
 	}
-
-	method recibirDanioVisual() {
-		//game.schedule(500, { self.alternarVisualDanio()})
-		self.alternarVisualDanio()
-	}
 	
-	method alternarVisualDanio() {
-		
+	method alternarVisualDanio() {	
 		game.schedule(100, { self.image(self.visualDanioPosicionado())})
 		game.schedule(1000, { self.image(self.visualPosicionado())}) 
-		
-//		if (image == direccionALaQueMira) {
-//			image = self.visualPosicionado().toString() + "_danio.png"
-//		} else {
-//			image = self.visualPosicionado()
-//		}
 	}
 	
 	method visualPosicionado() {
