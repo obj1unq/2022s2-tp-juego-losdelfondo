@@ -1,4 +1,5 @@
 import wollok.game.*
+import configuracion.*
 
 class Obstaculo {
 
@@ -13,17 +14,28 @@ class Obstaculo {
 	var property image = null
 
 	method sePuedeAtravesar()
+	
+	method danio()=0
 
+	method recibirDanio(cantidad) {}
+	
+	method esAtravesado(personaje){}
 }
 
 class Puerta inherits Obstaculo {
-
-	override method sePuedeAtravesar() {
-		return false
+	
+	var property puertaActiva = false
+	
+	override method sePuedeAtravesar()= self.puertaActiva()
+	
+	method puedeCambiarEstado(){
+		return manager.entidades().isEmpty()
 	}
-
+	
 	method cambiarEstado() {
-	// Cambia el estado cuando el personaje consigue una llave
+		if (self.puedeCambiarEstado()){
+			self.puertaActiva(true)		
+		}	
 	}
 
 }
@@ -40,13 +52,6 @@ class Piso inherits Obstaculo {
 
 	override method sePuedeAtravesar() {
 		return true
-	}
-
-	method danio() {
-		return 0
-	}
-
-	method recibirDanio(cantidad) {
 	}
 
 }

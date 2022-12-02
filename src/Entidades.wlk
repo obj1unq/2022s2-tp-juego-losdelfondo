@@ -1,5 +1,7 @@
 import wollok.game.*
 import direcciones.*
+import pantallas.*
+import obstaculosTutorial.*
 
 class Entidad {
 
@@ -92,6 +94,8 @@ class Enemigo inherits Individuo {
 	const property objetivo = principal
 
 	method accionar()
+	
+	method esAtravesado(personaje){}
 
 }
 
@@ -132,6 +136,9 @@ class Proyectil inherits Individuo {
 	}
 
 //	override method recibirDanioVisual(){}
+	
+	method esAtravesado(personaje){}
+
 }
 
 class Shooter inherits Enemigo {
@@ -190,7 +197,13 @@ object principal inherits Individuo (danio = 50, nombre = "principal") {
 
 	override method sePuedeAtravesar() = true
 
+	override method morirme(){
+		super()
+		gameOver.iniciar()
+	}
+
 	method colisionar(colisionado) {
+		self.atravesarPortal(colisionado)
 		self.colisionarCon(colisionado)
 	}
 
@@ -198,14 +211,22 @@ object principal inherits Individuo (danio = 50, nombre = "principal") {
 		self.recibirDanio(enemigo.danio())
 	}
 	
-	override method morirme(){
-		game.stop()
+	method atacar(direccion){
+		game.getObjectsIn(direccion.posicion(self.position())).forEach({objeto => objeto.recibirDanio(danio)})
+		portal.cambiarEstado()
 	}
-
-	method atacar(direccion) {
-		game.getObjectsIn(direccion.posicion(self.position())).forEach({ objeto => objeto.recibirDanio(danio)})
+	
+	method puedeAtravesarPortal(){
+		return portal.puertaActiva()
 	}
-
+	
+	
+	method atravesarPortal(_portal){
+		if(_portal == portal){
+			portal.esAtravesado(self)		
+		} 
+	}
+	
 }
 
 object maquinaExpendedora inherits Shooter (danio = 10, nombre = "maquina") {

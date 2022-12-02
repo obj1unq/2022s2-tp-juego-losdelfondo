@@ -1,12 +1,12 @@
 import wollok.game.*
 import obstaculos.*
+import pantallas.*
 
 object piso {
 
 	method nuevo(posicion) {
 		return game.addVisual(new Piso(position = posicion, image = "assets/pisos/pebble_brown_0_new.png"))
 	}
-
 }
 
 object spawn {
@@ -14,7 +14,26 @@ object spawn {
 	method nuevo(posicion) {
 		return game.addVisual(new Piso(position = posicion, image = "assets/pisos/spawn.png"))
 	}
+}
 
+
+object portal inherits Puerta (image = "assets/extras/portalDesactivado.png") {
+
+	method nuevo(posicion) {
+		return game.addVisualIn(self, posicion)
+	}
+	
+
+	override method cambiarEstado(){
+		if (self.puedeCambiarEstado()){
+			self.puertaActiva(true)
+			self.image("assets/extras/portal.gif")		
+		}	
+	} 
+	
+	override method esAtravesado(personaje) {
+		victoria.iniciar()
+	}
 }
 
 object puerta {
