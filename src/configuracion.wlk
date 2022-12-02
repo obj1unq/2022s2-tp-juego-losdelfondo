@@ -33,12 +33,7 @@ object manager {
 	}
 	
 	method empezarAccion(dificultad){
-		self.configurarEntidades(entidades)
 		self.accionarEntidades(dificultad)
-	}
-
-	method configurarEntidades(pjs) {
-		pjs.forEach({pj => entidades.add(pj)})	
 	}
 
 	method accionarEntidades(dificultad) {
