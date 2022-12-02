@@ -4,6 +4,7 @@ class Texto {
 	
 	method sePuedeAtravesar() = true
 	method danio()=0
+	method esAtravesado(personaje){}
 }
 
 object tutorialMovimiento  inherits Texto{
@@ -16,4 +17,8 @@ object tutorialAtaque  inherits Texto{
 
 object escapandoUNQ  inherits Texto{
 	method text() = "¡ INTENTA ESCAPAR DE LA UNQ !"	
+}
+
+object activacionPortal   inherits Texto{
+	method text() = "¡ UTILIZA NUEVAMENTE LA TECLA ' J ' PARA ACTIVAR EL PORTAL !"	
 }
