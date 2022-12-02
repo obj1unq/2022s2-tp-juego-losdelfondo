@@ -31,15 +31,6 @@ object manager {
 		keyboard.d().onPressDo({ principal.moverse(derecha)})
 		keyboard.j().onPressDo({ principal.atacar(principal.direccionALaQueMira())})
 	}
-	
-	method empezarAccion(dificultad){
-		self.configurarEntidades(entidades)
-		self.accionarEntidades(dificultad)
-	}
-
-	method configurarEntidades(pjs) {
-		pjs.forEach({pj => entidades.add(pj)})	
-	}
 
 	method accionarEntidades(dificultad) {
 		game.onTick(dificultad, "accionar del juego", { self.limpiarEntidadesMuertas()
