@@ -1,34 +1,79 @@
 import obstaculosTutorial.*
 import Entidades.*
 import configuracion.*
+import wollok.game.*
+import direcciones.*
 
-describe "Test de portales"{
+describe "Test de portales" {
 
-	test "Portal desactivado"{
+	test "Portal desactivado" {
 		assert.notThat(portal.puertaActiva())
 	}
-	
-	test "Portal activado"{
+
+	test "Portal activado" {
 		fidel.vida(0)
 		maquinaExpendedora.vida(0)
 		manager.limpiarEntidadesMuertas()
 		portal.cambiarEstado()
 		assert.that(portal.puertaActiva())
 	}
+
 }
 
-describe "Test de personaje"{
-	
-	test "Recibir daño"{
+describe "Test de personaje" {
+
+	test "Recibir daño" {
 		principal.colisionarCon(fidel)
 		assert.equals(80, principal.vida())
 	}
-	
-	test "Sacar personaje al morir"{
+
+	test "Sacar personaje al morir" {
 		principal.colisionarCon(fidel)
 		principal.colisionarCon(fidel)
 		principal.colisionarCon(fidel)
 		principal.colisionarCon(fidel)
-		assert.throwsException({principal.colisionarCon(fidel)})
+		assert.throwsException({ principal.colisionarCon(fidel)})
 	}
+		
 }
+
+describe "Se acerca al principal" {
+
+	test "desde abajo" {
+		fidel.position(game.center())
+		principal.position(game.center().up(1))
+		const distanciaOriginal = fidel.position().distance(principal.position())
+		fidel.accionar()
+		const distanciaNueva = fidel.position().distance(principal.position())
+		assert.that(distanciaOriginal > distanciaNueva )
+	}
+	
+	test "desde arriba" {
+		fidel.position(game.center())
+		principal.position(game.center().down(1))
+		const distanciaOriginal = fidel.position().distance(principal.position())
+		fidel.accionar()
+		const distanciaNueva = fidel.position().distance(principal.position())
+		assert.that(distanciaOriginal > distanciaNueva )
+	}
+	
+	test "desde izquierda" {
+		fidel.position(game.center())
+		principal.position(game.center().right(1))
+		const distanciaOriginal = fidel.position().distance(principal.position())
+		fidel.accionar()
+		const distanciaNueva = fidel.position().distance(principal.position())
+		assert.that(distanciaOriginal > distanciaNueva )
+	}
+	
+	test "desde derecha" {
+		fidel.position(game.center())
+		principal.position(game.center().left(1))
+		const distanciaOriginal = fidel.position().distance(principal.position())
+		fidel.accionar()
+		const distanciaNueva = fidel.position().distance(principal.position())
+		assert.that(distanciaOriginal > distanciaNueva )
+	}
+
+}
+
