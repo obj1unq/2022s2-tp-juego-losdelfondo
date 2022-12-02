@@ -26,18 +26,28 @@ class Entidad {
 	}
 
 	method recibirDanioVisual() {
-		game.onTick(500, "alternar visual " + self.nombre(), { self.alternarVisualDanio()})
-		game.schedule(2000, game.removeTickEvent("alternar visual " + self.nombre()))
+		//game.schedule(500, { self.alternarVisualDanio()})
+		self.alternarVisualDanio()
 	}
+	
 	method alternarVisualDanio() {
-		if (image == direccionALaQueMira) {
-			image = self.visualPosicionado().toString() + "_danio.png"
-		} else {
-			image = self.visualPosicionado()
-		}
+		
+		game.schedule(500, { self.visualDanioPosicionado()})
+		game.schedule(500, { self.visualPosicionado()}) 
+		
+//		if (image == direccionALaQueMira) {
+//			image = self.visualPosicionado().toString() + "_danio.png"
+//		} else {
+//			image = self.visualPosicionado()
+//		}
 	}
+	
 	method visualPosicionado() {
 		return (self.nombre() + "/" + self.direccionALaQueMira().toString() + ".png")
+	}
+	
+	method visualDanioPosicionado(){
+		return (self.nombre() + "/" + self.direccionALaQueMira().toString() + "_danio.png")
 	}
 
 	method morirme() {

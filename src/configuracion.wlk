@@ -14,7 +14,7 @@ object manager {
 
 	method iniciarPersonajes() {
 		configuracionMapaTutorial.colocarEntidad(principal, game.at(23, 22))
-//		configuracionMapaTutorial.colocarEntidad(maquinaExpendedora, game.at(8, 25))
+		configuracionMapaTutorial.colocarEntidad(maquinaExpendedora, game.at(8, 25))
 		configuracionMapaTutorial.colocarEntidad(fidel, game.at(10, 11))
 	}
 
