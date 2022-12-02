@@ -1,6 +1,34 @@
+import obstaculosTutorial.*
+import Entidades.*
+import configuracion.*
 
-test "testX" {
+describe "Test de portales"{
 
-	assert.that(true)
+	test "Portal desactivado"{
+		assert.notThat(portal.puertaActiva())
+	}
+	
+	test "Portal activado"{
+		fidel.vida(0)
+		maquinaExpendedora.vida(0)
+		manager.limpiarEntidadesMuertas()
+		portal.cambiarEstado()
+		assert.that(portal.puertaActiva())
+	}
+}
 
+describe "Test de personaje"{
+	
+	test "Recibir daño"{
+		principal.colisionarCon(fidel)
+		assert.equals(80, principal.vida())
+	}
+	
+	test "Sacar personaje al morir"{
+		principal.colisionarCon(fidel)
+		principal.colisionarCon(fidel)
+		principal.colisionarCon(fidel)
+		principal.colisionarCon(fidel)
+		assert.throwsException({principal.colisionarCon(fidel)})
+	}
 }
