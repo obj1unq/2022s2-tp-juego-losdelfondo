@@ -16,11 +16,20 @@ object spawn {
 	}
 }
 
-object portal inherits Puerta (image = "assets/extras/portal.gif") {
+
+object portal inherits Puerta (image = "assets/extras/portalDesactivado.png") {
 
 	method nuevo(posicion) {
 		return game.addVisualIn(self, posicion)
 	}
+	
+
+	override method cambiarEstado(){
+		if (self.puedeCambiarEstado()){
+			self.puertaActiva(true)
+			self.image("assets/extras/portal.gif")		
+		}	
+	} 
 	
 	override method esAtravesado(personaje) {
 		victoria.iniciar()
