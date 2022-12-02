@@ -19,11 +19,12 @@ class Entidad {
 	}
 
 	method recibirDanio(cantidad) {
-		self.recibirDanioVisual()
-		vida = vida - cantidad
-		if (vida <= 0) {
-			self.morirme()
-		} else {
+		if (cantidad > 0){
+			vida = vida - cantidad
+			self.alternarVisualDanio()
+			if (vida <= 0) {
+				self.morirme()
+			}
 		}
 	}
 
@@ -34,8 +35,8 @@ class Entidad {
 	
 	method alternarVisualDanio() {
 		
-		game.schedule(500, { self.visualDanioPosicionado()})
-		game.schedule(500, { self.visualPosicionado()}) 
+		game.schedule(100, { self.image(self.visualDanioPosicionado())})
+		game.schedule(1000, { self.image(self.visualPosicionado())}) 
 		
 //		if (image == direccionALaQueMira) {
 //			image = self.visualPosicionado().toString() + "_danio.png"
@@ -55,9 +56,6 @@ class Entidad {
 	method morirme() {
 		game.removeVisual(self)
 	}
-
-	method image() = self.visualPosicionado()
-
 }
 
 class Individuo inherits Entidad {

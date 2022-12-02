@@ -12,7 +12,7 @@ const extremo = 500
 
 object manager {
 
-	var entidades = [fidel]
+	var entidades = [fidel, maquinaExpendedora]
 
 	method iniciarPersonajes() {
 		configuracionMapaTutorial.colocarEntidad(principal, game.at(23, 22))
@@ -29,6 +29,11 @@ object manager {
 		keyboard.a().onPressDo({ principal.moverse(izquierda)})
 		keyboard.s().onPressDo({ principal.moverse(abajo)})
 		keyboard.d().onPressDo({ principal.moverse(derecha)})
+//		keyboard.v().onPressDo({ principal.image(principal.visualPosicionado())})
+//		keyboard.c().onPressDo({ principal.image(principal.visualDanioPosicionado())})
+//		keyboard.z().onPressDo({ game.say(principal, principal.visualPosicionado().toString())})
+//		keyboard.x().onPressDo({ game.say(principal, principal.visualDanioPosicionado().toString())})
+//		keyboard.i().onPressDo({ game.say(principal, principal.image().toString())})
 		keyboard.j().onPressDo({ principal.atacar(principal.direccionALaQueMira())})
 	}
 	
