@@ -1,6 +1,8 @@
 class Texto {
 	var property position = null
 	method textColor() = "ffffff"
+	
+	method sePuedeAtravesar() = true
 }
 
 object tutorialMovimiento  inherits Texto{

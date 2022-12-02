@@ -1,5 +1,6 @@
 import wollok.game.*
 import direcciones.*
+import pantallas.*
 
 class Entidad {
 
@@ -31,6 +32,8 @@ class Entidad {
 	method morirme(){
 		game.removeVisual(self)
 	}
+	
+	method esAtravesado(personaje){}
 
 }
 
@@ -154,7 +157,14 @@ object principal inherits Individuo (danio = 50, nombre = "principal") {
 
 	override method sePuedeAtravesar() = true
 
+	override method morirme(){
+		super()
+		game.clear()
+		game.boardGround(pantalla.gameOver())
+	}
+
 	method colisionar(colisionado) {
+		self.atravesarPortal(colisionado)
 		self.colisionarCon(colisionado)
 	}
 
@@ -165,7 +175,11 @@ object principal inherits Individuo (danio = 50, nombre = "principal") {
 	method atacar(direccion){
 		game.getObjectsIn(direccion.posicion(self.position())).forEach({objeto => objeto.recibirDanio(danio)})
 	}
-
+	
+	method atravesarPortal(portal){
+		portal.esAtravesado(self)
+	}
+	
 }
 
 object maquinaExpendedora inherits Shooter (danio = 10, nombre = "maquina") {}
