@@ -7,9 +7,6 @@ object piso {
 	method nuevo(posicion) {
 		return game.addVisual(new Piso(position = posicion, image = "assets/pisos/pebble_brown_0_new.png"))
 	}
-	
-	method esAtravesado(personaje){}
-
 }
 
 object spawn {
@@ -17,8 +14,6 @@ object spawn {
 	method nuevo(posicion) {
 		return game.addVisual(new Piso(position = posicion, image = "assets/pisos/spawn.png"))
 	}
-	
-	method esAtravesado(personaje){}
 }
 
 object portal {
@@ -28,7 +23,7 @@ object portal {
 	}
 	
 	method esAtravesadoPor(personaje){
-		return game.uniqueCollider(self) !== personaje
+		return game.colliders(self).contains(personaje)
 	}
 	
 	method esAtravesado(personaje) {

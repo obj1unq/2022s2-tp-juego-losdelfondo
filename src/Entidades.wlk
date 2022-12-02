@@ -32,8 +32,6 @@ class Entidad {
 	method morirme(){
 		game.removeVisual(self)
 	}
-	
-	method esAtravesado(personaje){}
 
 }
 

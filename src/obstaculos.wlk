@@ -48,6 +48,7 @@ class Piso inherits Obstaculo {
 
 	method recibirDanio(cantidad) {
 	}
-
+	
+	method esAtravesado(personaje){}
 }
 
