@@ -2,6 +2,8 @@ import wollok.game.*
 import direcciones.*
 import Entidades.*
 import mapaTutorial.*
+import pantallas.*
+import obstaculosTutorial.*
 
 const facil = 3000
 const normal = 2000
@@ -36,7 +38,7 @@ object manager {
 	}
 
 	method configurarEntidades(pjs) {
-		pjs.forEach({pj => entidades.add(pj)})
+		pjs.forEach({pj => entidades.add(pj)})	
 	}
 
 	method accionarEntidades(dificultad) {
@@ -57,5 +59,8 @@ object manager {
 		entidades.add(entidad)
 	}
 
+	method entidades(){
+		return entidades
+	}
 }
 

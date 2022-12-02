@@ -16,21 +16,14 @@ object spawn {
 	}
 }
 
-object portal {
+object portal inherits Puerta (image = "assets/extras/portal.gif") {
 
 	method nuevo(posicion) {
-		return game.addVisual(new Piso(position = posicion, image = "assets/extras/portal.gif"))
+		return game.addVisualIn(self, posicion)
 	}
 	
-	method esAtravesadoPor(personaje){
-		return game.colliders(self).contains(personaje)
-	}
-	
-	method esAtravesado(personaje) {
-		if (self.esAtravesadoPor(personaje)){
-			game.clear()
-			game.boardGround(pantalla.victoria())	
-		}
+	override method esAtravesado(personaje) {
+		victoria.iniciar()
 	}
 }
 

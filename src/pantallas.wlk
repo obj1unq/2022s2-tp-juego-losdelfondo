@@ -1,16 +1,19 @@
 import wollok.game.*
 
-object pantalla {
-		
-	method gameOver(){
-		return "assets/pantallas/gameover.jpeg"
-	}
+class Pantalla {
 	
-	method victoria(){
-		return "assets/pantallas/ganaste.jpeg"
-	}
+	var property image
+	const property position = game.at(0, 0) 
 	
-	method fondoMapa(){
-		return "assets/pantallas/fondoMapa.png"
+	method iniciar(){
+		game.clear()
+		game.addVisual(self)
 	}
 }
+
+
+object gameOver inherits Pantalla (image= "assets/pantallas/gameover.jpeg" ) {}
+
+object victoria inherits Pantalla (image= "assets/pantallas/ganaste.jpeg" ) {}
+
+//object fondo inherits Pantalla (image= "assets/pantallas/fondoMapa.png" ) {} 
