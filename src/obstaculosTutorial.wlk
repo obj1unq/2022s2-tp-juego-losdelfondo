@@ -1,12 +1,12 @@
 import wollok.game.*
 import obstaculos.*
+import pantallas.*
 
 object piso {
 
 	method nuevo(posicion) {
 		return game.addVisual(new Piso(position = posicion, image = "assets/pisos/pebble_brown_0_new.png"))
 	}
-
 }
 
 object spawn {
@@ -14,7 +14,24 @@ object spawn {
 	method nuevo(posicion) {
 		return game.addVisual(new Piso(position = posicion, image = "assets/pisos/spawn.png"))
 	}
+}
 
+object portal {
+
+	method nuevo(posicion) {
+		return game.addVisual(new Piso(position = posicion, image = "assets/extras/portal.gif"))
+	}
+	
+	method esAtravesadoPor(personaje){
+		return game.colliders(self).contains(personaje)
+	}
+	
+	method esAtravesado(personaje) {
+		if (self.esAtravesadoPor(personaje)){
+			game.clear()
+			game.boardGround(pantalla.victoria())	
+		}
+	}
 }
 
 object puerta {
