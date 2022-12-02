@@ -16,12 +16,14 @@ object spawn {
 	}
 }
 
+
 object portal inherits Puerta (image = "assets/extras/portalDesactivado.png") {
 
 	method nuevo(posicion) {
 		return game.addVisualIn(self, posicion)
 	}
 	
+
 	override method cambiarEstado(){
 		if (self.puedeCambiarEstado()){
 			self.puertaActiva(true)
