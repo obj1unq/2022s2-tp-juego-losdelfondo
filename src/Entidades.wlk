@@ -162,7 +162,6 @@ object principal inherits Individuo (danio = 50, nombre = "principal") {
 	}
 
 	method colisionar(colisionado) {
-		self.atravesarPortal(colisionado)
 		self.colisionarCon(colisionado)
 	}
 
