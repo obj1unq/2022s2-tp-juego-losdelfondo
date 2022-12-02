@@ -18,8 +18,8 @@ object configuracionMapaTutorial {
 		self.colocarHabitacionDisparo()
 		self.colocarHabitacionPelea()
 		pincel.pintar(16, 18, muroCruz)
-		pincel.pintar(20, 16, portal)
-		self.colocarEntidad(activacionPortal, game.at(23, 16))
+		pincel.pintar(20, 17, portal)
+		self.colocarEntidad(activacionPortal, game.at(23, 17))
 	}
 	
 	method colocarHabitacionSpawn(){

@@ -12,7 +12,7 @@ object tutorialMovimiento  inherits Texto{
 }
 
 object tutorialAtaque  inherits Texto{
-	method text() = "¡ CON LA TECLA ' J ' PODRAS DISPARAR Y ATACAR A LOS ENEMIGOS !"	
+	method text() = "¡ CON LA TECLA ' J ' PODRAS ATACAR A LOS ENEMIGOS A MELEE!"	
 }
 
 object escapandoUNQ  inherits Texto{
