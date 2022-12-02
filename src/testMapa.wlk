@@ -25,22 +25,26 @@ class Mapa {
 	const centroMapa = game.center()
 	
 	method setearMarcoInicial(ancho, alto, listaMuro){
-		const altoMaximo = centroMapa.y() + (alto/2)
-		const altoMinimo = centroMapa.y() - (alto/2)
-		const anchoMaximo = centroMapa.x() + (ancho/2)
-		const anchoMinimo = centroMapa.x() - (ancho/2)
-		pincel.pintarHorizontalmente(anchoMinimo, altoMinimo, anchoMaximo, listaMuro.get(1))
-		pincel.pintarHorizontalmente(anchoMaximo, altoMaximo, anchoMinimo, listaMuro.get(0))
-		pincel.pintarVerticalmente(anchoMinimo, altoMinimo, altoMaximo, listaMuro.get(2))
-		pincel.pintarVerticalmente(anchoMaximo, altoMaximo, altoMinimo, listaMuro.get(3))
+		const altoMaximo = centroMapa.y() + (alto/2).truncate(0)
+		const altoMinimo = centroMapa.y() - (alto/2).truncate(0)
+		const anchoMaximo = centroMapa.x() + (ancho/2).truncate(0)
+		const anchoMinimo = centroMapa.x() - (ancho/2).truncate(0)
+		pincel.pintar(anchoMinimo, altoMinimo, listaMuro.get(2))
+		pincel.pintar(anchoMinimo, altoMaximo, listaMuro.get(3))
+		pincel.pintar(anchoMaximo, altoMaximo, listaMuro.get(4))
+		pincel.pintar(anchoMaximo, altoMinimo, listaMuro.get(5))
+		pincel.pintarHorizontalmente(anchoMinimo+1, altoMinimo, anchoMaximo-1, listaMuro.get(0))
+		pincel.pintarHorizontalmente(anchoMaximo-1, altoMaximo, anchoMinimo+1, listaMuro.get(0))
+		pincel.pintarVerticalmente(anchoMinimo, altoMinimo+1, altoMaximo-1, listaMuro.get(1))
+		pincel.pintarVerticalmente(anchoMaximo, altoMaximo-1, altoMinimo+1, listaMuro.get(1))
 		
 	}
 	
 	method colocarPiso(ancho, alto, pisoAColocar){
-		const altoMaximo = centroMapa.y() + (alto/2)
-		const altoMinimo = centroMapa.y() - (alto/2)
-		const anchoMaximo = centroMapa.x() + (ancho/2)
-		const anchoMinimo = centroMapa.x() - (ancho/2)
+		const altoMaximo = centroMapa.y() + (alto/2).truncate(0)
+		const altoMinimo = centroMapa.y() - (alto/2).truncate(0)
+		const anchoMaximo = centroMapa.x() + (ancho/2).truncate(0)
+		const anchoMinimo = centroMapa.x() - (ancho/2).truncate(0)
 		(altoMinimo..altoMaximo).forEach({
 			nivel => 
 			pincel.pintarHorizontalmente(anchoMinimo, nivel, anchoMaximo, pisoAColocar)
