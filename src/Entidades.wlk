@@ -10,6 +10,7 @@ class Entidad {
 	var property position = game.center()
 	var property danio = 1
 	var property vida = 100
+	var property image = self.visualPosicionado()
 
 	method sePuedeAtravesar()
 
@@ -18,23 +19,30 @@ class Entidad {
 	}
 
 	method recibirDanio(cantidad) {
-		vida = vida - cantidad
-		if (vida <= 0) {
-			self.morirme()
-		} else {
+		if (cantidad > 0){
+			vida = vida - cantidad
+			self.alternarVisualDanio()
+			if (vida <= 0) {
+				self.morirme()
+			}
 		}
 	}
-
-	method visualPosicionado() {
-		return (self.nombre().toString() + "/" + self.direccionALaQueMira().toString() + ".png")
+	
+	method alternarVisualDanio() {	
+		game.schedule(100, { self.image(self.visualDanioPosicionado())})
+		game.schedule(1000, { self.image(self.visualPosicionado())}) 
 	}
-
-	method image() = self.visualPosicionado()
-
+	
+	method visualPosicionado() {
+		return (self.nombre() + "/" + self.direccionALaQueMira().toString() + ".png")
+	}
+	
+	method visualDanioPosicionado(){
+		return (self.nombre() + "/" + self.direccionALaQueMira().toString() + "_danio.png")
+  }
 	method morirme() {
 		game.removeVisual(self)
 	}
-
 }
 
 class Individuo inherits Entidad {
@@ -44,6 +52,7 @@ class Individuo inherits Entidad {
 
 	method moverse(direccion) {
 		direccionALaQueMira = direccion
+		image = self.visualPosicionado()
 		if (direccion.puedeMoverseA(self)) {
 			self.avanzar(direccion)
 		} else {
@@ -56,6 +65,10 @@ class Individuo inherits Entidad {
 
 	method avanzar(direccion) {
 		self.position(direccion.posicion(self.position()))
+	}
+
+	override method nombre() {
+		return nombre.toString()
 	}
 
 }
@@ -74,7 +87,7 @@ class Enemigo inherits Individuo {
 
 class Proyectil inherits Individuo {
 
-	const velocidad = 300
+	const velocidad = 500
 
 	override method image() = self.visualPosicionado()
 
@@ -104,18 +117,17 @@ class Proyectil inherits Individuo {
 		return (super())
 	}
 
-	method esAtravesado(personaje) {
-	}
+	method esAtravesado(personaje) {}
 
 	override method visualPosicionado() {
 		return "proyectiles/" + nombre.toString() + ".png"
 	}
-
 }
 
 class Shooter inherits Enemigo {
 
 	const proyectiles = [ "candy", "donut" ]
+
 	var cantidadDeBalas = 0
 
 	override method moverse(direccion) {
@@ -200,11 +212,7 @@ object principal inherits Individuo (danio = 50, nombre = "principal") {
 
 }
 
-object maquinaExpendedora inherits Shooter (danio = 10, nombre = "maquina") {
+object maquinaExpendedora inherits Shooter (danio = 10, nombre = "maquina") {}
 
-}
-
-object fidel inherits Stalker(danio = 20, nombre = "fidel") {
-
-}
+object fidel inherits Stalker(danio = 20, nombre = "fidel") {}
 
