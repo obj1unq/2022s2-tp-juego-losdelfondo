@@ -25,6 +25,7 @@ class Entidad {
 			if (vida <= 0) {
 				self.morirme()
 			}
+		}
 	}
 	
 	method alternarVisualDanio() {	
