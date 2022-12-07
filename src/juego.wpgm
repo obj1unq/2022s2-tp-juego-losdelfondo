@@ -1,8 +1,25 @@
 import wollok.game.*
-import pepita.*
+import direcciones.*
+import obstaculosTutorial.*
+import mapaTutorial.*
+import Entidades.*
+import configuracion.*
+import pantallas.*
+
 
 program juego {
-	game.title("Juego Base")
-	game.addVisual(pepita)
+	// init nivel
+	game.title("juego Base")
+	game.height(30)
+	game.width(30)
+	game.boardGround("assets/pantallas/fondoMapa.png")
+	
+	//fondo.iniciar()
+	configuracionMapaTutorial.cargarMapaTutorial() // TODO remover el disenio del piso como un objeto
+	manager.iniciarPersonajes()
+	manager.iniciarTeclas()
+	manager.accionarEntidades(normal)
+	manager.configurarColisiones(principal)
+	
 	game.start()
 }

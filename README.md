@@ -1,10 +1,11 @@
-# Nombre del juego (<- borrar y completar)
+# Escapando de la UNQ
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Ferrances Lorenzo
+- Pablo Conde
+- Tomas Gonzalez
+- Matias Gomez.
 
 ## Capturas
 
@@ -12,8 +13,14 @@
 
 ## Reglas de Juego / Instrucciones
 
-(Escribirlas)
+Juego tipo dungeon crawl donde el **personaje** debe de llegar al final de la primera sala *momentaneamente* para ganar el juego.
 
+
+## Personaje
+
+## Mapa
+
+## Enemigos
 
 ## Otros
 
