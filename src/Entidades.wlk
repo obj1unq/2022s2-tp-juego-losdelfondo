@@ -25,7 +25,6 @@ class Entidad {
 			if (vida <= 0) {
 				self.morirme()
 			}
-		}
 	}
 	
 	method alternarVisualDanio() {	
@@ -39,8 +38,7 @@ class Entidad {
 	
 	method visualDanioPosicionado(){
 		return (self.nombre() + "/" + self.direccionALaQueMira().toString() + "_danio.png")
-	}
-
+  }
 	method morirme() {
 		game.removeVisual(self)
 	}
@@ -80,8 +78,9 @@ class Enemigo inherits Individuo {
 	const property objetivo = principal
 
 	method accionar()
-	
-	method esAtravesado(personaje){}
+
+	method esAtravesado(personaje) {
+	}
 
 }
 
@@ -107,7 +106,7 @@ class Proyectil inherits Individuo {
 	method serDisparadoPor(personaje) {
 		self.position(direccionALaQueMira.posicion(personaje.position()))
 		game.addVisual(self)
-		game.onTick(velocidad, "movimiento de proyectil" + self.nombre(), { self.moverse(direccionALaQueMira)})
+		game.onTick(velocidad, "movimiento de proyectil" + nombre.toString(), { self.moverse(direccionALaQueMira)})
 	}
 
 	override method sePuedeAtravesar() = true
@@ -117,19 +116,17 @@ class Proyectil inherits Individuo {
 		return (super())
 	}
 
+	method esAtravesado(personaje) {}
+
 	override method visualPosicionado() {
-		return "proyectiles/" + self.nombre() + ".png"
+		return "proyectiles/" + nombre.toString() + ".png"
 	}
-
-//	override method recibirDanioVisual(){}
-	
-	method esAtravesado(personaje){}
-
 }
 
 class Shooter inherits Enemigo {
 
-	const proyectiles = [ "donut", "candy" ]
+	const proyectiles = [ "candy", "donut" ]
+
 	var cantidadDeBalas = 0
 
 	override method moverse(direccion) {
@@ -183,7 +180,7 @@ object principal inherits Individuo (danio = 50, nombre = "principal") {
 
 	override method sePuedeAtravesar() = true
 
-	override method morirme(){
+	override method morirme() {
 		super()
 		gameOver.iniciar()
 	}
@@ -196,30 +193,25 @@ object principal inherits Individuo (danio = 50, nombre = "principal") {
 	override method colisionarCon(enemigo) {
 		self.recibirDanio(enemigo.danio())
 	}
-	
-	method atacar(direccion){
-		game.getObjectsIn(direccion.posicion(self.position())).forEach({objeto => objeto.recibirDanio(danio)})
+
+	method atacar(direccion) {
+		game.getObjectsIn(direccion.posicion(self.position())).forEach({ objeto => objeto.recibirDanio(danio)})
 		portal.cambiarEstado()
 	}
-	
-	method puedeAtravesarPortal(){
+
+	method puedeAtravesarPortal() {
 		return portal.puertaActiva()
 	}
-	
-	
-	method atravesarPortal(_portal){
-		if(_portal == portal){
-			portal.esAtravesado(self)		
-		} 
+
+	method atravesarPortal(_portal) {
+		if (_portal == portal) {
+			portal.esAtravesado(self)
+		}
 	}
-	
-}
-
-object maquinaExpendedora inherits Shooter (danio = 10, nombre = "maquina") {
 
 }
 
-object fidel inherits Stalker(danio = 20, nombre = "fidel") {
+object maquinaExpendedora inherits Shooter (danio = 10, nombre = "maquina") {}
 
-}
+object fidel inherits Stalker(danio = 20, nombre = "fidel") {}
 
